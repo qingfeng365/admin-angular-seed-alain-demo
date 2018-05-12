@@ -257,7 +257,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@delon/abc@^1.0.0-beta.9":
+"@delon/abc@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/abc/download/@delon/abc-1.0.0-beta.10.tgz#9b303d36c7865307e9bc1bc8d374f34c89dd8e7f"
   dependencies:
@@ -265,37 +265,37 @@
     ngx-countdown "^2.1.0"
     qrious "^4.0.2"
 
-"@delon/acl@^1.0.0-beta.9":
+"@delon/acl@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/acl/download/@delon/acl-1.0.0-beta.10.tgz#3a00aa72707916ff29678ba09b7e4166d2650c87"
 
-"@delon/auth@^1.0.0-beta.9":
+"@delon/auth@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/auth/download/@delon/auth-1.0.0-beta.10.tgz#c8ed691ec5797a058bd5c82a9be2bcde39c26f9d"
 
-"@delon/cache@^1.0.0-beta.9":
+"@delon/cache@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/cache/download/@delon/cache-1.0.0-beta.10.tgz#a07523a4d3b6968bff1efa142a5b791d980340c4"
 
-"@delon/cli@^1.0.0-beta.9":
+"@delon/cli@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/cli/download/@delon/cli-1.0.0-beta.10.tgz#7e694bd545c85835648e7b86ad699c65a6ad4ec8"
   dependencies:
     "@angular-devkit/core" "^0.4.6"
     "@angular-devkit/schematics" "^0.4.6"
 
-"@delon/form@^1.0.0-beta.9":
+"@delon/form@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/form/download/@delon/form-1.0.0-beta.10.tgz#55cd271ed630bac629ad30e1f53f6326a2d7edab"
   dependencies:
     "@delon/util" "^1.0.0-beta.10"
     ng-zorro-antd "^0.7.0-beta.5"
 
-"@delon/mock@^1.0.0-beta.9":
+"@delon/mock@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/mock/download/@delon/mock-1.0.0-beta.10.tgz#38b71f6be4d173190a4c9d1095f8a95ceb9fef6f"
 
-"@delon/theme@^1.0.0-beta.9":
+"@delon/theme@^1.0.0-beta.10":
   version "1.0.0-beta.10"
   resolved "https://r.cnpmjs.org/@delon/theme/download/@delon/theme-1.0.0-beta.10.tgz#f8e7cd2890b4f110b2649dfa5c5b99f94539a15d"
   dependencies:
@@ -306,10 +306,6 @@
   resolved "https://r.cnpmjs.org/@delon/util/download/@delon/util-1.0.0-beta.10.tgz#396721fbc1cb9aefbc1118c13f33094063f4cc1d"
   dependencies:
     deep-extend "^0.5.1"
-
-"@delon/util@^1.0.0-beta.9":
-  version "1.0.0-beta.9"
-  resolved "https://r.cnpmjs.org/@delon/util/download/@delon/util-1.0.0-beta.9.tgz#14bcef202535000486d05be995043d5b1ac94b74"
 
 "@ngtools/json-schema@1.2.0":
   version "1.2.0"
