@@ -14,10 +14,11 @@
       "group": true,
       "hideInBreadcrumb": true,
       "children": [{
-          "text": "基础表单",
+          "text": "首页",
           "icon": "icon-speedometer",
-          "link": "/pro/form/basic-form",
-          "i18n": "basic-form"
+          "link": "/home",
+          "i18n": "home",
+          "hideInBreadcrumb": true
         },
         {
           "text": "快捷菜单",
