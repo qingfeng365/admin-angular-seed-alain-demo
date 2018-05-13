@@ -16,12 +16,15 @@ import { UserLockComponent } from './passport/lock/lock.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
+import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutDefaultComponent,
     children: [
+      { path: 'home', component: HomeComponent },
       { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
       // { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
       { path: 'pro', loadChildren: './pro/pro.module#ProModule' },

@@ -13,11 +13,12 @@ import { CallbackComponent } from './callback/callback.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [SharedModule, RouteRoutingModule],
   declarations: [
-
+    HomeComponent,
     // passport pages
     UserLoginComponent,
     UserRegisterComponent,
