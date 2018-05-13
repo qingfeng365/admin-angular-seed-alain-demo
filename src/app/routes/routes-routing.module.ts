@@ -23,7 +23,7 @@ const routes: Routes = [
     component: LayoutDefaultComponent,
     children: [
       { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
-      { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
+      // { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
       { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
     ],
   },

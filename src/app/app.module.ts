@@ -1,9 +1,9 @@
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UEditorModule } from 'ngx-ueditor';
@@ -18,6 +18,8 @@ import { SimpleInterceptor } from '@delon/auth';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { I18NService } from '@core/i18n/i18n.service';
+import { LayoutModule } from './layout/layout.module';
+import { RoutesModule } from './routes/routes.module';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `assets/i18n/`, '.json');
 }
@@ -40,9 +42,9 @@ export function StartupServiceFactory(
     SharedModule,
 
 
-    AppRoutingModule, // 暂时用这个
-    // LayoutModule,  //先不处理
-    // RoutesModule,  //先不处理
+    // AppRoutingModule, // 暂时用这个
+    LayoutModule,
+    RoutesModule,
 
     // i18n
     TranslateModule.forRoot({
