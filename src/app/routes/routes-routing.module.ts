@@ -24,6 +24,7 @@ const routes: Routes = [
     path: '',
     component: LayoutDefaultComponent,
     children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
       // { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
