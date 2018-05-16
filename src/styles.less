@@ -5,95 +5,109 @@
 // region: Third Library
 @import '../node_modules/simple-line-icons/css/simple-line-icons.css';
 // endregion
-@import "./styles/index";
-@import "./styles/theme";
+@import './styles/index';
+@import './styles/theme';
+
+@font-face {
+  font-family: 'TypoPRO Kaushan Script';
+  src: url('./assets/font/TypoPRO-KaushanScript-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body,
 html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, 0.65);
-    background-color: #ffffff;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    overflow-x: hidden;
-    overflow-y: auto;
+  // font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', SimSun, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 @-webkit-keyframes spin {
-    0% {
-        transform: rotate(0)
-    }
-    100% {
-        transform: rotate(360deg)
-    }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0)
-    }
-    100% {
-        transform: rotate(360deg)
-    }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1003;
-    /* background: #000000; */
-    background: #202538;
-    overflow: hidden
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1003;
+  /* background: #000000; */
+  background: #202538;
+  overflow: hidden;
 }
 
 .spinner div:first-child {
-    display: block;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border-radius: 50%;
-    box-shadow: 0 3px 3px 0 rgba(255, 56, 106, 1);
-    transform: translate3d(0, 0, 0);
-    animation: spin 2s linear infinite
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border-radius: 50%;
+  box-shadow: 0 3px 3px 0 rgba(255, 56, 106, 1);
+  transform: translate3d(0, 0, 0);
+  animation: spin 2s linear infinite;
 }
 
 .spinner div:first-child:after,
 .spinner div:first-child:before {
-    content: '';
-    position: absolute;
-    border-radius: 50%
+  content: '';
+  position: absolute;
+  border-radius: 50%;
 }
 
 .spinner div:first-child:before {
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    box-shadow: 0 3px 3px 0 rgb(255, 228, 32);
-    animation: spin 3s linear infinite
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  box-shadow: 0 3px 3px 0 rgb(255, 228, 32);
+  animation: spin 3s linear infinite;
 }
 
 .spinner div:first-child:after {
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    box-shadow: 0 3px 3px 0 rgba(61, 175, 255, 1);
-    animation: spin 1.5s linear infinite
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  box-shadow: 0 3px 3px 0 rgba(61, 175, 255, 1);
+  animation: spin 1.5s linear infinite;
 }
 
-app-root {
-    display: block;
-    height: 100%;
+app-root .wrapper .content {
+  margin-bottom: 0;
+}
+
+.aside-collapsed .header .logo span.expanded {
+  display: none;
 }

@@ -29,7 +29,7 @@ export class UserLockComponent {
     if (this.f.valid) {
       console.log('Valid!');
       console.log(this.f.value);
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['home']);
     }
   }
 }

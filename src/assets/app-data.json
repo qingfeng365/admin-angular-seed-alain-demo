@@ -1,12 +1,12 @@
 {
   "app": {
-    "name": "Alain",
-    "description": "Ng-zorro admin panel front-end framework"
+    "name": "Quickly Admin",
+    "description": "后台管理系统"
   },
   "user": {
     "name": "Admin",
     "avatar": "./assets/img/avatar.jpg",
-    "email": "cipchk@qq.com"
+    "email": "admin@xyz.com"
   },
   "menu": [{
       "text": "主导航",
@@ -15,7 +15,7 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "首页",
-          "icon": "icon-speedometer",
+          "icon": "icon-home",
           "link": "/home",
           "i18n": "home",
           "hideInBreadcrumb": true

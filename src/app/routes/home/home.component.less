@@ -1,0 +1,18 @@
+@import '~@delon/theme/styles/index';
+:host {
+  // display: block;
+  height: calc(~'100vh - @{reuse-tab-height} - @{header-hg}');
+  margin-left: -@lg;
+  margin-right: -@lg;
+  background: url('/assets/img/bg-big.png') no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tilte {
+  color: #535353;
+  font-size: @h1-font-size;
+}

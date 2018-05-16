@@ -4,14 +4,10 @@ import { _HttpClient } from '@delon/theme';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.less'],
 })
 export class HomeComponent implements OnInit {
+  constructor(private http: _HttpClient) {}
 
-  constructor(
-    private http: _HttpClient
-  ) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
