@@ -1,0 +1,48 @@
+page-header(title="查询列表")
+//- nzBordered: 是有边框
+nz-card([nzBordered]="false")
+  //- nz-form 组件的 inline 模式有 bug, 因此要额外指定 .search__form
+  //- .search__form  的定义 :　/node_modules/@delon/theme/styles/app/pro/form.less
+  //- bug 说明:
+  //- https://github.com/NG-ZORRO/ng-zorro-antd/issues/1202
+  form.search__form(nz-form="", nzLayout="inline")
+    //- 大小普通屏幕 分三栏 = 24/8, 小屏只分一栏
+    nz-row([nzGutter]="{ md: 8, lg: 24, xl: 48 }")
+      //- 指定一个条件占 1/3 行(宽屏), 如果要整行 nzMd="24"
+      nz-col(nzMd="8", nzSm="24")
+        nz-form-item
+          nz-form-label(nzFor="no") 规则编号
+          nz-form-control
+            input(nz-input="",[(ngModel)]="q.no",name="no",placeholder="请输入",id="no")
+      nz-col(nzMd="8", nzSm="24")
+        nz-form-item
+          nz-form-label(nzFor="status") 使用状态
+          nz-form-control
+            nz-select([(ngModel)]="q.status",name="status",nzPlaceHolder="请选择使用状态",id="status",[nzShowSearch]="true")
+              nz-option(*ngFor="let statu of status; let i = index", [nzLabel]="statu.text", [nzValue]="i")
+      nz-col(nzMd="8", nzSm="24", *ngIf="expandForm")
+        //- 该条件只是作样子, 没有设置对应过滤的代码
+        //- 同时,数值型条件, 应用 范围输入框(目前还没有这种形式的组件,以后再处理)
+        nz-form-item
+          nz-form-label(nzFor="callNo") 调用次数
+          nz-form-control
+            input(nz-input="",[(ngModel)]="q.callNo",name="callNo",placeholder="请输入调用次数",id="callNo")
+      nz-col(nzMd="8", nzSm="24", *ngIf="expandForm")
+        //- 该条件只是作样子, 没有设置对应过滤的代码
+        nz-form-item
+          nz-form-label(nzFor="updatedAt") 更新日期
+          nz-form-control
+            nz-date-picker([(ngModel)]="q.updatedAt",name="updatedAt",id="updatedAt")
+      nz-col(nzMd="8", nzSm="24", *ngIf="expandForm")
+        nz-form-item
+          nz-form-label(nzFor="status") 使用状态
+          nz-form-control
+            nz-radio-group([(ngModel)]="q.status",name="statusRadio",id="statusRadio")
+              label(nz-radio-button="",*ngFor="let statu of status; let i = index", [nzValue]="i") {{statu.text}}
+      //- 展开时占整行, 占整行时,靠右
+      nz-col([nzSpan]="expandForm ? 24 : 8", [class.text-right]="expandForm")
+        button(nz-button, type="submit", nzType="primary", [nzLoading]="loading") 查询
+        button(nz-button, type="reset") 查询
+        a((click)="expandForm=!expandForm")
+          | {{expandForm ? '收起' : '展开'}}
+          i.anticon([class.anticon-down]="!expandForm", [class.anticon-up]="expandForm")

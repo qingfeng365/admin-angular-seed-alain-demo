@@ -6282,6 +6282,13 @@ next-tick@1:
   version "1.0.0"
   resolved "https://r.cnpmjs.org/next-tick/download/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
+ng-zorro-antd@^0.7.0:
+  version "0.7.0"
+  resolved "https://r.cnpmjs.org/ng-zorro-antd/download/ng-zorro-antd-0.7.0.tgz#36c60d72ee2303a97e6dcc4b8f93cba9cf4269ff"
+  dependencies:
+    "@angular/cdk" "^5.0.0"
+    date-fns "^1.29.0"
+
 ng-zorro-antd@^0.7.0-beta.5:
   version "0.7.0-beta.5"
   resolved "https://r.cnpmjs.org/ng-zorro-antd/download/ng-zorro-antd-0.7.0-beta.5.tgz#204fa475d05e1e6e4b5254b92d182db9875f0324"

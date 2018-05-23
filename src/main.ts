@@ -8,7 +8,9 @@ import { hmrBootstrap } from './hmr';
 
 import { preloaderFinished } from '@delon/theme';
 preloaderFinished();
-
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+registerLocaleData(zh);
 if (environment.production) {
   enableProdMode();
 }

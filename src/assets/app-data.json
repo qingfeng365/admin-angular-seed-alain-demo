@@ -30,6 +30,17 @@
       ]
     },
     {
+      "text": "List",
+      "i18n": "list",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [{
+        "text": "query list",
+        "i18n": "query-list",
+        "link": "/list/query-list"
+      }]
+    },
+    {
       "text": "Pro",
       "i18n": "pro",
       "group": true,
