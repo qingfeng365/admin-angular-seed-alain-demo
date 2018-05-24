@@ -1,27 +1,37 @@
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, LOCALE_ID, APP_INITIALIZER, Injector } from '@angular/core';
+import {
+  HttpClient,
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UEditorModule } from 'ngx-ueditor';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { StartupService } from '@core/startup/startup.service';
 import { DelonModule } from './delon.module';
-import { CoreModule } from '@core/core.module';
-import { SharedModule } from '@shared/shared.module';
-import { NgxTinymceModule } from 'ngx-tinymce';
-import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
-import { SimpleInterceptor } from '@delon/auth';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
+import { RoutesModule } from './routes/routes.module';
+import { LayoutModule } from './layout/layout.module';
+import { StartupService } from '@core/startup/startup.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
+import { SimpleInterceptor } from '@delon/auth';
+// angular i18n
+import { registerLocaleData } from '@angular/common';
+import localeZh from '@angular/common/locales/zh';
+registerLocaleData(localeZh);
+// i18n
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { I18NService } from '@core/i18n/i18n.service';
-import { LayoutModule } from './layout/layout.module';
-import { RoutesModule } from './routes/routes.module';
+// third
+import { UEditorModule } from 'ngx-ueditor';
+import { NgxTinymceModule } from 'ngx-tinymce';
+// @delon/form: JSON Schema form
+import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, `assets/i18n/`, '.json');
+  return new TranslateHttpLoader(http, `assets/tmp/i18n/`, '.json');
 }
 
 export function StartupServiceFactory(
@@ -29,6 +39,7 @@ export function StartupServiceFactory(
 ): Function {
   return () => startupService.load();
 }
+
 @NgModule({
   declarations: [
     AppComponent
@@ -40,9 +51,6 @@ export function StartupServiceFactory(
     DelonModule.forRoot(),
     CoreModule,
     SharedModule,
-
-
-    // AppRoutingModule, // 暂时用这个
     LayoutModule,
     RoutesModule,
 
@@ -55,14 +63,27 @@ export function StartupServiceFactory(
       },
     }),
     // thirds
-    UEditorModule.forRoot({
-      // 指定ueditor.js路径目录
-      path: 'assets/ueditor/',
-      // 默认全局配置项
-      options: {
-        themePath: '/assets/ueditor/themes/'
-      }
-    }),
+    // 这里旧版本的配置
+    // UEditorModule.forRoot({
+    //   // 指定ueditor.js路径目录
+    //   path: 'assets/ueditor/',
+    //   // 默认全局配置项
+    //   options: {
+    //     themePath: '/assets/ueditor/themes/'
+    //   }
+    // }),
+    // 这是新版本的配置,还需要修改
+    // UEditorModule.forRoot({
+    //   // **注：** 建议使用本地路径；以下为了减少 ng-alain 脚手架的包体大小引用了CDN，可能会有部分功能受影响
+    //   js: [
+    //     `//apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.config.js`,
+    //     `//apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.all.min.js`,
+    //   ],
+    //   options: {
+    //     UEDITOR_HOME_URL: `//apps.bdimg.com/libs/ueditor/1.4.3.1/`,
+    //   },
+    // }),
+
     NgxTinymceModule.forRoot({
       baseURL: '//cdn.bootcss.com/tinymce/4.7.4/',
     }),

@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingsService } from '@delon/theme';
 
 @Component({
-  selector: 'app-user-lock',
+  selector: 'passport-lock',
   templateUrl: './lock.component.html',
 })
 export class UserLockComponent {
@@ -29,7 +29,7 @@ export class UserLockComponent {
     if (this.f.valid) {
       console.log('Valid!');
       console.log(this.f.value);
-      this.router.navigate(['home']);
+      this.router.navigate(['dashboard']);
     }
   }
 }
