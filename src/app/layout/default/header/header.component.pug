@@ -1,0 +1,45 @@
+.logo
+  a([routerLink]="['/']")
+    span.logoexpanded.d-inline-flex.align-items-center
+      //- img.expanded(src='./assets/img/logo.svg', alt='{{settings.app.name}}', style='max-height:40px;')
+      span.logotext.expanded Quick Admin
+    img.collapsed(src='./assets/img/logo.svg', alt='{{settings.app.name}}', style='max-height:30px;')
+.top-nav-wrap
+  ul.top-nav
+    //- // Menu
+    li
+      .item((click)='toggleCollapsedSidebar()')
+        i.anticon(class="anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}")
+    //- // Lock Page
+    li.hidden-xs
+      .item([routerLink]="['/lock']")
+        i.anticon.anticon-lock
+    //- // Search Button
+    //- li.header-search__btn((click)='searchToggleChange()')
+    //-   .item
+    //-     i.anticon.anticon-search
+  //- header-search.header-search([toggleChange]='searchToggleStatus')
+  ul.top-nav
+    //- // Notify
+    li
+      header-notify
+    //- // Task
+    li.hidden-xs
+      header-task
+    //- // App Icons
+    //- li.hidden-xs
+    //-   header-icon
+    //- // Settings
+    li.hidden-xs
+      nz-dropdown(nztrigger='click', nzplacement='bottomRight')
+        .item(nz-dropdown='')
+          i.anticon.anticon-setting
+        div(nz-menu='', style='width:200px;')
+          div(nz-menu-item='')
+            header-fullscreen
+          div(nz-menu-item='')
+            header-storage
+          div(nz-menu-item='')
+            header-i18n
+    li.hidden-xs
+      header-user

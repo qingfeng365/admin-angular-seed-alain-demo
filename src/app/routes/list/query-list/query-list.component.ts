@@ -3,7 +3,7 @@ import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { SimpleTableData } from '@delon/abc';
 import { map, tap } from 'rxjs/operators';
-
+import { SortDef } from '../../../common-type';
 
 @Component({
   selector: 'app-query-list',
@@ -11,13 +11,51 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./query-list.component.less'],
 })
 export class QueryListComponent implements OnInit {
+  sortList: SortDef[] = [
+    {
+      title: '综合排序',
+      name: 'default',
+      isCanSelectOrderMode: false,
+      isDesc: false,
+    },
+    {
+      title: '规则编号',
+      name: 'no',
+      isCanSelectOrderMode: false,
+      isDesc: false,
+    },
+    {
+      title: '使用状态',
+      name: 'status',
+      isCanSelectOrderMode: false,
+      isDesc: false,
+    },
+    {
+      title: '调用次数',
+      name: 'callNo',
+      isCanSelectOrderMode: true,
+      isDesc: false,
+    },
+    {
+      title: '更新日期',
+      name: 'updatedAt',
+      isCanSelectOrderMode: true,
+      isDesc: false,
+    },
+  ];
   q: any = {
     pi: 1,   // 当前页数 page index
     ps: 10,  // 每页记录数 page size
     sorter: '', // 排序字段
     status: null, // 当前所选状态 对象
     statusList: [],  // 可选状态列表
+    updatedAt: [],
+    sortDefIndex: 0,  // 当前所选排序对象
+    lastSortDefIndex: 0, // 上一次所选排序对象
   };
+
+
+  expandFormQueryBtnSpan = 8;
 
   data: any[] = []; // 列表数据
   loading = false;  // 表格是否处于 loading
@@ -52,14 +90,26 @@ export class QueryListComponent implements OnInit {
     public msg: NzMessageService,
     private modalSrv: NzModalService,
   ) { }
-
   ngOnInit() {
     this.getData();
+  }
+  selectSort() {
+    if (this.q.sortDefIndex === this.q.lastSortDefIndex) {
+      // 是点击相同的排序
+      if (this.sortList[this.q.sortDefIndex].isCanSelectOrderMode) {
+        // 切换方向
+        this.sortList[this.q.sortDefIndex].isDesc = !this.sortList[this.q.sortDefIndex].isDesc;
+      }
+    } else {
+      // 是点击不同的排序, 重置 isDesc
+      this.sortList[this.q.sortDefIndex].isDesc = false;
+    }
+    this.q.lastSortDefIndex = this.q.sortDefIndex;
   }
   getData() {
     this.loading = true;
 
-    /** 原示例用还提供在表格列标题中提供筛选功能,
+    /** 原示例还提供在表格列标题中提供筛选功能,
      * 考虑到该功能会让前后端的处理代码变得复杂,
      * 目前不考虑设置表格列筛选功能,
      * 由于 mock 的筛选功能是查询 statusList,
