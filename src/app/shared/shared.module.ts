@@ -65,4 +65,4 @@ const DIRECTIVES = [];
     ...DIRECTIVES,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

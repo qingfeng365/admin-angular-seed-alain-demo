@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { SimpleTableData } from '@delon/abc';
+import { SimpleTableData, SimpleTableColumn, SimpleTableComponent } from '@delon/abc';
 import { map, tap } from 'rxjs/operators';
 import { SortDef } from '../../../common-type';
 
@@ -78,8 +78,56 @@ export class QueryListComponent implements OnInit {
   expandForm = false;
   // 当前用户选择的数据行
   selectedRows: SimpleTableData[] = [];
+
+  @ViewChild('st') st: SimpleTableComponent;
+  // 表格列定义
+  // index 对应字段名, 但支持嵌套写法, 如 a.b.c
+  // type 默认为 string
+  //   checkbox 多选；
+  //   radio 单选；
+  //   link 链接，可触发 click；
+  //   img 图像且居中；
+  //   number 数字且居右；
+  //   currency 货币且居右；
+  //   date 日期格式且居中；
+  //   yn 将boolean类型徽章化
+  columns: SimpleTableColumn[] = [
+    { title: '', index: 'key', type: 'checkbox' },
+    { title: '规则编号', index: 'no' },
+    { title: '描述', index: 'description' },
+    {
+      title: '服务调用次数',
+      index: 'callNo',
+      type: 'number',
+      format: (item: any) => `${item.callNo} 万`,
+    },
+    {
+      title: '状态',
+      index: 'status',
+      render: 'status', // 对应 ng-template(st-row="status")
+    },
+    {
+      title: '更新时间',
+      index: 'updatedAt',
+      type: 'date',
+    },
+    // {
+    //   title: '操作',
+    //   buttons: [
+    //     {
+    //       text: '详情',
+    //       click: (item: any) => this.msg.success(`详情${item.no}`),
+    //     },
+    //     {
+    //       text: '编辑',
+    //       click: (item: any) => this.msg.success(`编辑${item.no}`),
+    //     },
+    //   ],
+    // },
+  ];
+
   /**
-   * Creates an instance of QueryListComponent.
+   *
    * @param {_HttpClient} http
    * @param {NzMessageService} msg 全局信息提示 https://ng.ant.design/components/message/zh
    * @param {NzModalService} modalSrv
