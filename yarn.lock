@@ -6347,13 +6347,6 @@ ng-zorro-antd@^0.7.0:
     "@angular/cdk" "^5.0.0"
     date-fns "^1.29.0"
 
-ng-zorro-antd@^0.7.1:
-  version "0.7.1"
-  resolved "https://r.cnpmjs.org/ng-zorro-antd/download/ng-zorro-antd-0.7.1.tgz#28d610297a7e1acf584cfd9d538839bdc8321e14"
-  dependencies:
-    "@angular/cdk" "^5.0.0"
-    date-fns "^1.29.0"
-
 ngx-countdown@^3.0.0:
   version "3.0.1"
   resolved "https://r.cnpmjs.org/ngx-countdown/download/ngx-countdown-3.0.1.tgz#c3b367b454826f769513e2330cfa9709c7627c94"

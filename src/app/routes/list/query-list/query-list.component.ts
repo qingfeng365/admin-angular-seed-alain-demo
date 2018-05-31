@@ -111,19 +111,19 @@ export class QueryListComponent implements OnInit {
       index: 'updatedAt',
       type: 'date',
     },
-    // {
-    //   title: '操作',
-    //   buttons: [
-    //     {
-    //       text: '详情',
-    //       click: (item: any) => this.msg.success(`详情${item.no}`),
-    //     },
-    //     {
-    //       text: '编辑',
-    //       click: (item: any) => this.msg.success(`编辑${item.no}`),
-    //     },
-    //   ],
-    // },
+    {
+      title: '操作',
+      buttons: [
+        {
+          text: '详情',
+          click: (item: any) => this.msg.success(`详情${item.no}`),
+        },
+        {
+          text: '编辑',
+          click: (item: any) => this.msg.success(`编辑${item.no}`),
+        },
+      ],
+    },
   ];
 
   /**
