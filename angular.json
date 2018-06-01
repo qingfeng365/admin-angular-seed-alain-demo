@@ -134,37 +134,5 @@
       }
     }
   },
-  "defaultProject": "admin angular seed",
-  "schematics": {
-    "@delon/cli:class": {
-      "spec": false
-    },
-    "@delon/cli:component": {
-      "flat": false,
-      "spec": false,
-      "inlineStyle": true,
-      "inlineTemplate": false,
-      "prefix": "app",
-      "styleext": "less"
-    },
-    "@delon/cli:directive": {
-      "spec": false,
-      "prefix": "app"
-    },
-    "@delon/cli:guard": {
-      "spec": false
-    },
-    "@delon/cli:interface": {
-      "prefix": "I"
-    },
-    "@delon/cli:module": {
-      "spec": false
-    },
-    "@delon/cli:pipe": {
-      "spec": true
-    },
-    "@delon/cli:service": {
-      "spec": false
-    }
-  }
+  "defaultProject": "admin angular seed"
 }
