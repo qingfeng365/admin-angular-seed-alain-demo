@@ -1,7 +1,8 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SettingsService, TitleService } from '@delon/theme';
+import { SettingsService, TitleService, ALAIN_I18N_TOKEN } from '@delon/theme';
 import { filter } from 'rxjs/operators';
+import { I18NService } from '@core/i18n/i18n.service';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,9 @@ export class AppComponent implements OnInit {
   constructor(
     private settings: SettingsService,
     private router: Router,
-    private titleSrv: TitleService,
-  ) { }
+    private titleSrv: TitleService
+  ) {
+  }
 
   ngOnInit() {
     this.router.events
