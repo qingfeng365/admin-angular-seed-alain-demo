@@ -41,6 +41,29 @@
       }]
     },
     {
+      "text": "样式",
+      "i18n": "style",
+      "group": true,
+      "icon": "icon-chemistry",
+      "children": [{
+          "text": "Font Icons",
+          "link": "/style/iconsfont",
+          "i18n": "iconsfont"
+        },
+        {
+          "text": "Colors",
+          "link": "/style/colors",
+          "i18n": "colors"
+        },
+        {
+          "text": "Typography",
+          "link": "/style/typography",
+          "i18n": "typography",
+          "shortcut": true
+        }
+      ]
+    },
+    {
       "text": "Pro",
       "i18n": "pro",
       "group": true,

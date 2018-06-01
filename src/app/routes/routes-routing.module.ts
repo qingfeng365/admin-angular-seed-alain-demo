@@ -30,6 +30,7 @@ const routes: Routes = [
       // { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
       { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
       { path: 'list', loadChildren: './list/list.module#ListModule' },
+      { path: 'style', loadChildren: './style/style.module#StyleModule' },
     ],
   },
   // 全屏布局
