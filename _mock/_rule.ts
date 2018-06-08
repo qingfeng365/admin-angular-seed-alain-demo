@@ -25,6 +25,7 @@ for (let i = 0; i < 46; i += 1) {
 }
 
 function getRule(params: any) {
+  console.log('getRule:', params);
   let ret = [...list];
   if (params.sorter) {
     const s = params.sorter.split('_');
@@ -35,13 +36,41 @@ function getRule(params: any) {
       return prev[s[0]] - next[s[0]];
     });
   }
-  if (params.statusList && params.statusList.length > 0) {
-    ret = ret.filter(data => params.statusList.indexOf(data.status) > -1);
+  if (params.statusList) {
+    params.statusList = params.statusList.toString();
+
+    if (params.statusList && params.statusList.length > 0) {
+      console.log('params.statusList:', params.statusList);
+      ret = ret.filter(data => params.statusList.indexOf(data.status) > -1);
+    }
   }
   if (params.no) {
     ret = ret.filter(data => data.no.indexOf(params.no) > -1);
   }
-  return ret;
+
+  let beginPos = 0;
+  let endPos = ret.length;
+
+  // pi 当前页数, 是从 1 开始的
+  if (params.pi) {
+    beginPos = (params.pi - 1) * (params.ps || 10);
+    endPos = params.pi * (params.ps || 10);
+  }
+
+
+  return {
+    total: ret.length,
+    datas: ret.slice(beginPos, endPos)
+  };
+}
+
+function getRuleAll(params: any) {
+  console.log('getRuleAll:', params);
+  const ret = [...list];
+  return {
+    total: ret.length,
+    datas: ret,
+  };
 }
 
 function removeRule(nos: string): boolean {
@@ -75,6 +104,7 @@ function saveRule(description: string) {
 
 export const RULES = {
   '/rule': (req: MockRequest) => getRule(req.queryString),
+  '/rule/all': (req: MockRequest) => getRuleAll(req.queryString),
   'DELETE /rule': (req: MockRequest) => removeRule(req.queryString.nos),
   'POST /rule': (req: MockRequest) => saveRule(req.body.description),
 };

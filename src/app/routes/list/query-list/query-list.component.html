@@ -1,7 +1,7 @@
 
 <page-header title="查询列表"></page-header>
 <nz-card [nzBordered]="false">
-  <form class="search__form mb-0" nz-form="" nzLayout="inline">
+  <form class="search__form mb-0" nz-form="" nzLayout="inline" (ngSubmit)="search()">
     <nz-row [nzGutter]="{ md: 8, lg: 12, xl: 24 }">
       <nz-col nzMd="8" nzSm="24">
         <nz-form-item>
@@ -50,7 +50,7 @@
       <nz-col [nzSpan]="expandForm ? expandFormQueryBtnSpan : 8" [class.text-right]="true">
         <nz-form-item class="align-items-center">
           <button nz-button="nz-button" type="submit" nzType="primary" [nzLoading]="loading">查询</button>
-          <button nz-button="nz-button" type="reset">重置</button><a class="ml-sm" (click)="expandForm=!expandForm">{{expandForm ? '收起' : '展开'}}<i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i></a>
+          <button nz-button="nz-button" type="reset" (click)="reset()">重置</button><a class="ml-sm" (click)="expandForm=!expandForm">{{expandForm ? '收起' : '展开'}}<i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i></a>
         </nz-form-item>
       </nz-col>
     </nz-row>
@@ -66,22 +66,24 @@
   <nz-row class="mb-md" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <nz-col>
       <button nz-button="" nzType="primary"><i class="anticon anticon-plus"></i><span>新建</span></button>
-      <button class="ml-sm" nz-button="" [disabled]="selectedRows.length &gt; 0">批量操作</button>
+      <button class="ml-sm" nz-button="" (click)="exportToExcel()">输出</button>
+      <button class="ml-sm" nz-button="" [disabled]="selectedRows.length === 0">批量操作</button>
       <nz-dropdown class="ml-sm" nzPlacement="bottomLeft">
-        <button nz-button="" nz-dropdown="" [disabled]="selectedRows.length &gt; 0">更多操作<i class="anticon anticon-down"></i></button>
+        <button nz-button="" nz-dropdown="">更多操作<i class="anticon anticon-down"></i></button>
         <ul nz-menu="">
-          <li nz-menu-item="">删除</li>
-          <li nz-menu-item="">审核</li>
+          <li nz-menu-item="" (click)="remove()" [nzDisabled]="selectedRows.length === 0">删除</li>
+          <li nz-menu-divider=""></li>
+          <li nz-menu-item="" [nzDisabled]="selectedRows.length === 0" (click)="approval()">审核</li>
         </ul>
       </nz-dropdown>
     </nz-col>
     <nz-col>
       <nz-alert nzType="info" [nzShowIcon]="true" [nzMessage]="message">
-        <ng-template #message="">已选择<strong class="text-primary">{{selectedRows.length}}</strong>项&nbsp;&nbsp;<a class="ml-lg" *ngIf="selectedRows.length &gt; 0" (click)="clearSelectedRows()">清空</a></ng-template>
+        <ng-template #message="">已选择<strong class="text-primary">{{selectedRows.length}}</strong>项&nbsp;&nbsp;<a class="ml-lg" *ngIf="selectedRows.length &gt; 0" (click)="clearSelected()">清空</a></ng-template>
       </nz-alert>
     </nz-col>
   </nz-row>
-  <simple-table #st="" [columns]="columns" [data]="data" [loading]="loading" (checkboxChange)="checkboxChange($event)">
+  <simple-table #st="" [columns]="columns" [data]="dataUrl" [loading]="loading" (checkboxChange)="checkboxChange($event)" (change)="change($event)" [resReName]="{list:'datas'}" [extraParams]="q" [preDataChange]="preDataChange" [showSizeChanger]="true" [showQuickJumper]="true">
     <ng-template st-row="status" let-i="">
       <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
     </ng-template>

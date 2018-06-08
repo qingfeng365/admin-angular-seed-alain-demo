@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
       { path: 'list', loadChildren: './list/list.module#ListModule' },
       { path: 'style', loadChildren: './style/style.module#StyleModule' },
+      { path: 'trade', loadChildren: './trade/trade.module#TradeModule' },
     ],
   },
   // 全屏布局

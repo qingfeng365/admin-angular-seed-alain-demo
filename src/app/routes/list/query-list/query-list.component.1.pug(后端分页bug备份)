@@ -5,8 +5,7 @@ nz-card([nzBordered]="false")
   //- .search__form  的定义 :　/node_modules/@delon/theme/styles/app/pro/form.less
   //- bug 说明:
   //- https://github.com/NG-ZORRO/ng-zorro-antd/issues/1202
-  form.search__form.mb-0(nz-form="", nzLayout="inline",
-    (ngSubmit)="search()")
+  form.search__form.mb-0(nz-form="", nzLayout="inline")
     //- 大小普通屏幕 分三栏 = 24/8, 小屏只分一栏
     nz-row([nzGutter]="{ md: 8, lg: 12, xl: 24 }")
       //- 指定一个条件占 1/3 行(宽屏), 如果要整行 nzMd="24"
@@ -46,7 +45,7 @@ nz-card([nzBordered]="false")
       nz-col([nzSpan]="expandForm ? expandFormQueryBtnSpan : 8", [class.text-right]="true")
         nz-form-item.align-items-center
           button(nz-button, type="submit", nzType="primary", [nzLoading]="loading") 查询
-          button(nz-button, type="reset", (click)="reset()") 重置
+          button(nz-button, type="reset") 重置
           a.ml-sm((click)="expandForm=!expandForm")
             | {{expandForm ? '收起' : '展开'}}
             i.anticon([class.anticon-down]="!expandForm", [class.anticon-up]="expandForm")
@@ -70,20 +69,15 @@ nz-card([nzBordered]="false")
       button(nz-button="",nzType="primary")
         i.anticon.anticon-plus
         span 新建
-      button.ml-sm(nz-button="", (click)="exportToExcel()")
-        | 输出
-      button.ml-sm(nz-button="",[disabled]="selectedRows.length === 0")
+      button.ml-sm(nz-button="",[disabled]="selectedRows.length > 0")
         | 批量操作
       nz-dropdown.ml-sm(nzPlacement="bottomLeft")
-        button(nz-button="",nz-dropdown="")
+        button(nz-button="",nz-dropdown="",[disabled]="selectedRows.length > 0")
          | 更多操作
          i.anticon.anticon-down
         ul(nz-menu="")
-          li(nz-menu-item="", (click)="remove()",[nzDisabled]="selectedRows.length === 0") 删除
-          li(nz-menu-divider="")
-          li(nz-menu-item="",
-            [nzDisabled]="selectedRows.length === 0",
-            (click)="approval()") 审核
+          li(nz-menu-item="") 删除
+          li(nz-menu-item="") 审核
     nz-col
       //- 如果列表提供批量操作及分页时,应提供 已选择数量的提示, 和清空选择的操作
       nz-alert(nzType="info", [nzShowIcon]="true", [nzMessage]="message")
@@ -92,20 +86,19 @@ nz-card([nzBordered]="false")
           strong.text-primary {{selectedRows.length}}
           | 项&nbsp;&nbsp;
           a.ml-lg(*ngIf="selectedRows.length > 0",
-            (click)="clearSelected()") 清空
+            (click)="clearSelectedRows()") 清空
   //- 建议只使用 [data] 方式提供表格数据, 保持最大程度可控
   //- 且只使用后端分页功能,
   //- 且不使用表格列排序和筛选功能
   //- 且不启用固定列功能(因有缺陷)
   //- simple-table(#st="")
-  simple-table(#st="",[columns]="columns", [data]="dataUrl",
+  simple-table(#st="",[columns]="columns", [data]="data",
     [loading]="loading", (checkboxChange)="checkboxChange($event)",
     (change)="change($event)",
-    [resReName]="{list:'datas'}",
-    [extraParams]="q",
-    [preDataChange]="preDataChange",
-    [showSizeChanger]="true",
-    [showQuickJumper]="true")
+    [frontPagination]="false",
+    [pi]="stPageCurrNumber",
+    [total]="stRecordTotal",
+    [isPageIndexReset]="false")
     //- simple-table 内部的 ng-template 允许接收 `$implicit`(数据行,缺省值"")、`index`、`column`(列定义) 三个值。
     //- 原示例 仅写 `let-i` 是 let-i = "$implicit" 的简写, 即在结构性指令中的 "let i = $implicit"
     //- $implicit 是 angular 微语法的隐含对象,表示 *ngFor 的当前对象

@@ -41,6 +41,20 @@
       }]
     },
     {
+      "text": "测试",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [{
+          "text": "curd",
+          "link": "/trade/curd"
+        },
+        {
+          "text": "list",
+          "link": "/trade/list"
+        }
+      ]
+    },
+    {
       "text": "样式",
       "i18n": "style",
       "group": true,

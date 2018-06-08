@@ -28,7 +28,7 @@ export class StartupService {
     private titleService: TitleService,
     private httpClient: HttpClient,
     private injector: Injector,
-  ) {}
+  ) { }
 
   load(): Promise<any> {
     // only works with promises
@@ -44,12 +44,16 @@ export class StartupService {
             resolve(null);
             return [langData, appData];
           }),
-        )
+      )
         .subscribe(
           ([langData, appData]) => {
+
+            console.log('defaultLang:', this.i18n.defaultLang);
             // setting language data
             this.translate.setTranslation(this.i18n.defaultLang, langData);
             this.translate.setDefaultLang(this.i18n.defaultLang);
+
+
 
             // application data
             const res: any = appData;
@@ -63,12 +67,13 @@ export class StartupService {
             this.menuService.add(res.menu);
             // 设置页面标题的后缀
             this.titleService.suffix = res.app.name;
+
           },
-          () => {},
+          () => { },
           () => {
             resolve(null);
           },
-        );
+      );
     });
   }
 }
