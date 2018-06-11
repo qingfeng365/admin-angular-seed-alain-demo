@@ -26,10 +26,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
-      // { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
-      { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
       { path: 'list', loadChildren: './list/list.module#ListModule' },
+      { path: 'form', loadChildren: './form/form.module#FormModule' },
       { path: 'style', loadChildren: './style/style.module#StyleModule' },
       { path: 'trade', loadChildren: './trade/trade.module#TradeModule' },
     ],

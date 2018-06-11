@@ -65,6 +65,7 @@
   "pro-login": "Login",
   "pro-register": "Register",
   "pro-register-result": "Register Result",
-  "list": "list",
-  "query-list": "query list"
+  "list": "List",
+  "query-list": "Query list",
+  "basic": "Basic"
 }

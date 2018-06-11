@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { SimpleTableData, SimpleTableColumn, SimpleTableComponent } from '@delon/abc';
-import { map, tap } from 'rxjs/operators';
 import { SortDef } from '../../../common-type';
 import * as _ from 'lodash';
 
