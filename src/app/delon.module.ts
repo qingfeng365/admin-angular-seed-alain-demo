@@ -28,7 +28,13 @@ const MOCKMODULE = !environment.production ? [DelonMockModule.forRoot({ data: MO
 
 import { AdPageHeaderConfig } from '@delon/abc';
 export function pageHeaderConfig(): AdPageHeaderConfig {
-  return Object.assign(new AdPageHeaderConfig(), { home_i18n: 'home' });
+  return Object.assign(new AdPageHeaderConfig(),
+    { home_i18n: 'home', autoBreadcrumb: false, titleSync: true });
+}
+
+import { AdSimpleTableConfig } from '@delon/abc';
+export function simpleTableConfig(): AdSimpleTableConfig {
+  return Object.assign(new AdSimpleTableConfig(), {});
 }
 
 import { DelonAuthConfig } from '@delon/auth';
@@ -73,7 +79,7 @@ export class DelonModule {
           deps: [ReuseTabService],
         },
         // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
-        // { provide: SimpleTableConfig, useFactory: simpleTableConfig }
+        { provide: AdSimpleTableConfig, useFactory: simpleTableConfig },
         { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
         { provide: DelonAuthConfig, useFactory: delonAuthConfig },
       ],

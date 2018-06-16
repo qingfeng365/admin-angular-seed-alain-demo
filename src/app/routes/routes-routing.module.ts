@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { environment } from '@env/environment';
 // layout
 import { LayoutDefaultComponent } from '../layout/default/default.component';
-import { LayoutFullScreenComponent } from '../layout/fullscreen/fullscreen.component';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
 
 // passport pages
@@ -17,7 +16,6 @@ import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 import { HomeComponent } from './home/home.component';
-import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -30,6 +28,7 @@ const routes: Routes = [
       { path: 'form', loadChildren: './form/form.module#FormModule' },
       { path: 'style', loadChildren: './style/style.module#StyleModule' },
       { path: 'trade', loadChildren: './trade/trade.module#TradeModule' },
+      { path: 'detail', loadChildren: './detail/detail.module#DetailModule' },
     ],
   },
   // 全屏布局

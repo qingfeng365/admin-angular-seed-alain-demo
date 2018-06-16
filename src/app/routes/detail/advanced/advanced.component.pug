@@ -1,0 +1,49 @@
+page-header([title]="'单号：234231029431'")
+  ng-template(#action="")
+    nz-button-group
+      button(nz-button="") 普通操作
+      button(nz-button="") 普通操作
+    nz-dropdown.mx-sm
+      button(nz-button="", nz-dropdown="")
+        i.anticon.anticon-ellipsis
+      ul(nz-menu="")
+        li(nz-menu-item="") 选项一
+        li(nz-menu-item="") 选项二
+        li(nz-menu-item="") 选项三
+    button(nz-button="",nzType="primary") 主操作
+  ng-template(#extra="")
+    div(nz-row="")
+      div(nz-col="", nzXs="24", nzSm="12")
+        p.text-grey 状态
+        p.text-lg 待审批
+      div(nz-col="", nzXs="24", nzSm="12")
+        p.text-grey 订单金额
+        p.text-lg ¥ 568.08
+  desc-list(size="small", col="2")
+    desc-list-item(term="创建人") 曲丽丽
+    desc-list-item(term="订购产品") XX 服务
+    desc-list-item(term="创建时间") 2017-07-07
+    desc-list-item(term="关联单据")
+      a((click)="msg.success('yes')") 12421
+    desc-list-item(term="生效日期") 2017-07-07 ~ 2017-08-08
+    desc-list-item(term="备注") 请于两个工作日内确认
+nz-card.mb-lg([nzBordered]="false", nzTitle="流程进度")
+  nz-steps([nzCurrent]="1", nzProgressDot="")
+    nz-step([nzTitle]="'创建项目'", [nzDescription]="createDesc")
+      ng-template(#createDesc="")
+        .desc
+          .my-sm 曲丽丽
+          i.anticon.anticon-dingding-o.ml-sm
+          div 2016-12-12 12:32
+    nz-step([nzTitle]="'部门初审'", [nzDescription]="checkedDesc")
+      ng-template(#checkedDesc="")
+        .desc
+          .my-sm 周毛毛
+          i.anticon.anticon-dingding-o.ml-sm(style="color: #00a0e9;")
+          a((click)="msg.success('click')") 催一下
+    nz-step([nzTitle]="'财务复核'")
+    nz-step([nzTitle]="'完成'")
+  .steps-content
+nz-card.mb-lg([nzBordered]="false", nzTitle="用户信息")
+nz-card.mb-lg([nzBordered]="false", nzTitle="用户近半年来电记录")
+nz-card([nzBordered]="false")

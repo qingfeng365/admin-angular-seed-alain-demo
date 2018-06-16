@@ -8,11 +8,13 @@ function onError(error) {
 }
 
 gulp.task('watch', function() {
-  gulp.watch('src/**', ['build:pug']);
+  gulp.watch('src/**/*.pug', ['build:pug']);
 });
 
 gulp.task('build:pug', function() {
-  gulp.src('src/**/*.pug', { base: '.' })
+  gulp.src('src/**/*.pug', {
+      base: '.'
+    })
     .pipe(pug({
       pretty: true
     }))

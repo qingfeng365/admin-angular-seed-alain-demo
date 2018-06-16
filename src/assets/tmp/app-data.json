@@ -45,6 +45,15 @@
           "text": "基础表单",
           "icon": "icon-note",
           "link": "/form/basic-form"
+        },
+        {
+          "text": "基础详情页",
+          "icon": "icon-notebook",
+          "link": "/detail/basic"
+        }, {
+          "text": "高级详情页",
+          "icon": "icon-notebook",
+          "link": "/detail/advanced"
         }
       ]
     },
