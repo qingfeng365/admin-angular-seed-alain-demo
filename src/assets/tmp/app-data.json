@@ -58,6 +58,16 @@
       ]
     },
     {
+      "text": "综合",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [{
+        "text": "基本-增删查改",
+        "icon": "icon-list",
+        "link": "/basic-curd/list"
+      }]
+    },
+    {
       "text": "测试",
       "group": false,
       "icon": "icon-question",

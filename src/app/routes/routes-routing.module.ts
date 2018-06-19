@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'style', loadChildren: './style/style.module#StyleModule' },
       { path: 'trade', loadChildren: './trade/trade.module#TradeModule' },
       { path: 'detail', loadChildren: './detail/detail.module#DetailModule' },
+      { path: 'basic-curd', loadChildren: './basic-curd/basic-curd.module#BasicCurdModule' },
     ],
   },
   // 全屏布局
