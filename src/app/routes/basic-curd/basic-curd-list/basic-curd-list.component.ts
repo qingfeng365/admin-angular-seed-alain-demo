@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SortDef } from 'app/common-type';
 import { SimpleTableData, SimpleTableComponent, SimpleTableColumn } from '@delon/abc';
-import { _HttpClient } from '@delon/theme';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { _HttpClient, ModalHelper } from '@delon/theme';
+import { NzMessageService } from 'ng-zorro-antd';
 import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { BasicCurdEditModalComponent } from '../basic-curd-edit-modal/basic-curd-edit-modal.component';
+import { BasicCurdViewModalComponent } from '../basic-curd-view-modal/basic-curd-view-modal.component';
+
 @Component({
   selector: 'basic-curd-list',
   templateUrl: './basic-curd-list.component.html',
@@ -130,7 +133,11 @@ export class BasicCurdListComponent implements OnInit {
     },
     {
       title: '状态',
-      index: 'status',
+      // 这里设置为 status 或 statusText ,对于页面显示都可以
+      // 因为实际显示由模板决定, 模板实际上是用 statusText 显示,
+      // 但是对于输出就不同, 输出只会输出对应字段名的数据
+      // index: 'status',
+      index: 'statusText',
       render: 'status', // 对应 ng-template(st-row="status")
     },
     {
@@ -143,11 +150,28 @@ export class BasicCurdListComponent implements OnInit {
       buttons: [
         {
           text: '详情',
-          click: (item: any) => this.msg.success(`详情${item.no}`),
+          type: 'modal',
+          component: BasicCurdViewModalComponent,
+          params: (record: any) => {
+            return { key: record.key };
+          },
         },
         {
           text: '编辑',
-          click: (item: any) => this.msg.success(`编辑${item.no}`),
+          type: 'static',
+          component: BasicCurdEditModalComponent,
+          params: (record: any) => {
+            return { key: record.key };
+          },
+          click: (record: any, modalResult: any) => {
+            this.http
+              .post('/rule/update', modalResult)
+              .subscribe(res => {
+                this.msg.success(`编辑成功`);
+                this.st.reload();
+              });
+
+          },
         },
       ],
     },
@@ -157,18 +181,17 @@ export class BasicCurdListComponent implements OnInit {
    *
    * @param {_HttpClient} http
    * @param {NzMessageService} msg 全局信息提示 https://ng.ant.design/components/message/zh
-   * @param {NzModalService} modalSrv
+   * @param {ModalHelper} modalHelper 使用 modalHelper 比 NzModalService 更好一点
    * @memberof QueryListComponent
    */
   constructor(private http: _HttpClient,
     public msg: NzMessageService,
-    private modalSrv: NzModalService, ) { }
+    private modalHelper: ModalHelper, ) { }
 
   ngOnInit() {
     this.getData();
   }
   getData() {
-    console.log('getData...');
     this.loading = true;
 
     /** 原示例还提供在表格列标题中提供筛选功能,
@@ -231,10 +254,6 @@ export class BasicCurdListComponent implements OnInit {
         this.stRecordTotal = res.total;
         this.stPageCurrNumber = res.datas.length === 0 ? 0 : this.q.pi;
         this.data = res.datas;
-        console.log('this.data:', this.data);
-        console.log('stRecordTotal:', this.stRecordTotal);
-        console.log('stPageCurrNumber:', this.stPageCurrNumber);
-        console.log('stPageSize:', this.stPageSize);
       });
   }
   selectSort() {
@@ -301,18 +320,66 @@ export class BasicCurdListComponent implements OnInit {
   }
 
   exportToExcel() {
-    // 这里要获取全部数据,要重新指定获取全部数据的url
-    // 因 export 不能指定附加参数, 而表格的要求的 url 不能带查询参数,
-    // 只能是纯 url, 因此最好另外指定 新的 url
-    // 用 表格 组件的方法, 好处 是 不需要处理标题行
-    // 如果 输入时对数据列有隐藏, 内容格式等额外需求时, 则
-    // 不要用 url 方式, 改用 data[] 模式, 自行处理 data[]后输出
     // filename 可以不指定, 默认为 export.xlsx
 
     const dataUrl = '/rule/all';
-    // 注意: preDataChange 在这里是不会执行的, 因此
-    // 建议尽量少用 preDataChange, 应在后端将数据处理好
-    this.st.export(dataUrl, { filename: 'query-list.xlsx' });
+    this.http
+      .get(dataUrl, this.q)
+      .pipe(
+        map((res: { total: number, datas: any[] }) => {
+          const newDatas = res.datas.map(i => {
+            const statusItem = this.status[i.status];
+            i.statusText = statusItem.text;
+            i.statusType = statusItem.type;
+            return i;
+          });
 
+          return { datas: newDatas };
+        }),
+    )
+      .subscribe(res => {
+        this.st.export(res.datas, { filename: 'basic-curd-list.xlsx' });
+      });
+
+  }
+
+  add() {
+    // 调用静态对话框, 静态是指点击蒙层不会自动关闭
+    // 要订阅后,才会调出对话框,
+    // 使用 modalHelper , 只有对话框确定后, 才会得到订阅值
+    this.modalHelper
+      .static(
+        BasicCurdEditModalComponent,
+        {
+          record: { isNew: true }
+        }, )
+      .subscribe(modalResult => {
+        console.log('add data:', modalResult);
+        this.http
+          .post('/rule/update', modalResult)
+          .subscribe(res => {
+            this.msg.success(`新增成功`);
+            this.st.reload();
+          });
+      });
+
+
+
+  }
+  search() {
+    this.clearSelected();
+    if (this.q.status !== null) {
+      this.q.statusList = [this.q.status];
+    } else {
+      this.q.statusList = [];
+    }
+    this.st.reload(this.q);
+  }
+  reset() {
+    this.clearSelected();
+    this.q.no = '';
+    this.q.status = null;
+    this.q.statusList = [];
+    this.st.reload(this.q);
   }
 }

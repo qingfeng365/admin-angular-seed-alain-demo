@@ -1,0 +1,24 @@
+
+<div class="modal-header">
+  <div class="modal-title">详情</div>
+</div>
+<nz-tabset class="mb-lg" (nzSelectedIndexChange)="selectStyleIndex($event)" [nzSelectedIndex]="styleIndex">
+  <nz-tab nzTitle="左右三栏式">适合大部分字段内容都不太长, 至少不需要换行的情况</nz-tab>
+  <nz-tab nzTitle="上下两栏式">适合大部分字段内容都比较长, 需要换行的情况</nz-tab>
+  <nz-tab nzTitle="一栏">适合字段内容都比较长,或者高度不一致的情况</nz-tab>
+</nz-tabset>
+<nz-spin class="modal-spin" *ngIf="!data"></nz-spin>
+<desc-list *ngIf="data" [layout]="dlLayout" [col]="dlCol">
+  <desc-list-item term="key">{{data.key}}</desc-list-item>
+  <desc-list-item term="编号">{{data.no}}</desc-list-item>
+  <desc-list-item term="姓名">{{data.owner}}</desc-list-item>
+  <desc-list-item term="头像"><img [_src]="data.avatar"/></desc-list-item>
+  <desc-list-item term="任务">{{data.title}}</desc-list-item>
+  <desc-list-item term="状态">{{data.statusText}}</desc-list-item>
+  <desc-list-item term="链接">{{data.href}}</desc-list-item>
+  <desc-list-item term="调用次数">{{data.callNo}}万</desc-list-item>
+  <desc-list-item term="进度">{{data.progress}}％</desc-list-item>
+  <desc-list-item term="描述">{{data.description}}</desc-list-item>
+  <desc-list-item term="更新日期">{{data.updatedAt | _date:'YYYY-MM-DD'}}</desc-list-item>
+  <desc-list-item term="创建日期">{{data.createdAt | _date:'YYYY-MM-DD'}}</desc-list-item>
+</desc-list>

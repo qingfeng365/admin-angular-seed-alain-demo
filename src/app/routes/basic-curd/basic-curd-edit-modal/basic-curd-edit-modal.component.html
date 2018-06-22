@@ -1,0 +1,16 @@
+
+<div class="modal-header">
+  <div class="modal-title">{{isInNewState ? '新增' : '编辑'}}</div>
+</div>
+<nz-tabset class="mb-lg" (nzSelectedIndexChange)="selectStyleIndex($event)" [nzSelectedIndex]="styleIndex">
+  <nz-tab nzTitle="普通两栏式">适合标题比较规整, 在四个字左右的表单</nz-tab>
+  <nz-tab nzTitle="两栏上下式">适合标题比较长,需要提供附加说明的表单, 附加说明推荐使用 optionalHelp 或 optional , 尽量不要使用 description</nz-tab>
+  <nz-tab nzTitle="居中式">适合输入控件高度不一致,有特殊要求的表单</nz-tab>
+</nz-tabset>
+<nz-spin class="modal-spin" *ngIf="!data || styleChanging"></nz-spin>
+<sf *ngIf="data && (!styleChanging)" #sf="" [schema]="schema" [ui]="ui" [formData]="data" button="none" [layout]="sfLayout" [firstVisual]="false" [liveValidate]="true">
+  <div class="modal-footer">
+    <button nz-button="" type="button" (click)="close()">关闭</button>
+    <button nz-button="" type="submit" [nzType]="'primary'" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading">保存</button>
+  </div>
+</sf>
