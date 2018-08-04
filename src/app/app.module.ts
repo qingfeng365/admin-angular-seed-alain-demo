@@ -3,6 +3,7 @@ import {
   HttpClient,
   HTTP_INTERCEPTORS,
   HttpClientModule,
+  HttpClientXsrfModule,
 } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +49,10 @@ export function StartupServiceFactory(
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    // HttpClientXsrfModule.withOptions({
+    //   cookieName: 'csrfToken',
+    //   headerName: 'x-csrf-token',
+    // }),
     DelonModule.forRoot(),
     CoreModule,
     SharedModule,
@@ -92,7 +97,7 @@ export function StartupServiceFactory(
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },
-    { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
     { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
     StartupService,

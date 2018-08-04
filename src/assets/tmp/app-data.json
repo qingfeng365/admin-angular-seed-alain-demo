@@ -68,6 +68,14 @@
       }]
     },
     {
+      "text": "安全",
+      "group": true,
+      "children": [{
+        "text": "csrf",
+        "link": "/security/csrf"
+      }]
+    },
+    {
       "text": "测试",
       "group": false,
       "icon": "icon-question",

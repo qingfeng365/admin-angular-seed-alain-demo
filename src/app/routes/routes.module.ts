@@ -15,6 +15,7 @@ import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 import { HomeComponent } from './home/home.component';
 
+
 @NgModule({
   imports: [SharedModule, RouteRoutingModule],
   declarations: [

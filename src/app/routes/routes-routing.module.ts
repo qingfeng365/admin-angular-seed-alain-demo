@@ -30,6 +30,7 @@ const routes: Routes = [
       { path: 'trade', loadChildren: './trade/trade.module#TradeModule' },
       { path: 'detail', loadChildren: './detail/detail.module#DetailModule' },
       { path: 'basic-curd', loadChildren: './basic-curd/basic-curd.module#BasicCurdModule' },
+      { path: 'security', loadChildren: './security/security.module#SecurityModule' },
     ],
   },
   // 全屏布局

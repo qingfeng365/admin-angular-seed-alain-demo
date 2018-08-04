@@ -1,8 +1,9 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SettingsService, TitleService } from '@delon/theme';
+import { SettingsService, TitleService, _HttpClient } from '@delon/theme';
 import { filter } from 'rxjs/operators';
 import { ReuseTabService } from '@delon/abc';
+
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
     private settings: SettingsService,
     private router: Router,
     private titleSrv: TitleService,
-    private reuseTabService: ReuseTabService
+    private reuseTabService: ReuseTabService,
+    private http: _HttpClient,
   ) {
     this.reuseTabService.debug = true;
   }
@@ -39,5 +41,9 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter(evt => evt instanceof NavigationEnd))
       .subscribe(() => this.titleSrv.setTitle());
+
+    const url = 'http://127.0.0.1:7001/security';
+
+
   }
 }
