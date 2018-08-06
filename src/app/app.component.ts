@@ -1,9 +1,15 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnInit,
+  Renderer2,
+  ElementRef,
+} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SettingsService, TitleService, _HttpClient } from '@delon/theme';
+import { SettingsService, TitleService } from '@delon/theme';
 import { filter } from 'rxjs/operators';
 import { ReuseTabService } from '@delon/abc';
-
+import { VERSION as VERSION_ALAIN } from '@delon/theme';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +30,20 @@ export class AppComponent implements OnInit {
   }
 
   constructor(
+    el: ElementRef,
+    renderer: Renderer2,
     private settings: SettingsService,
     private router: Router,
     private titleSrv: TitleService,
     private reuseTabService: ReuseTabService,
-    private http: _HttpClient,
+    // private http: _HttpClient,
   ) {
     this.reuseTabService.debug = true;
+    renderer.setAttribute(
+      el.nativeElement,
+      'ng-alain-version',
+      VERSION_ALAIN.full,
+    );
   }
 
   ngOnInit() {

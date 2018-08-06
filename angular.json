@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "admin angular seed": {
+    "admin-angular-seed": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -56,21 +56,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "admin angular seed:build"
+            "browserTarget": "admin-angular-seed:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "admin angular seed:build:production"
+              "browserTarget": "admin-angular-seed:build:production"
             },
             "hmr": {
-              "browserTarget": "admin angular seed:build:hmr"
+              "browserTarget": "admin-angular-seed:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "admin angular seed:build"
+            "browserTarget": "admin-angular-seed:build"
           }
         },
         "test": {
@@ -108,7 +108,7 @@
         }
       }
     },
-    "admin angular seed-e2e": {
+    "admin-angular-seed-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -117,7 +117,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "admin angular seed:serve"
+            "devServerTarget": "admin-angular-seed:serve"
           }
         },
         "lint": {
@@ -134,7 +134,7 @@
       }
     }
   },
-  "defaultProject": "admin angular seed",
+  "defaultProject": "admin-angular-seed",
   "schematics": {
     "ng-alain:module": {
       "routing": true,
