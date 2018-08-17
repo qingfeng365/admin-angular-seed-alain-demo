@@ -3,6 +3,7 @@
     "name": "Quickly Admin",
     "description": "后台管理系统"
   },
+  "apiServerBaseUrl": "http://127.0.0.1:7001/api/",
   "user": {
     "name": "Admin",
     "avatar": "./assets/tmp/img/avatar.jpg",
@@ -17,12 +18,10 @@
           "text": "首页",
           "icon": "icon-home",
           "link": "/home",
-          "i18n": "home",
           "hideInBreadcrumb": true
         },
         {
           "text": "快捷菜单",
-          "i18n": "shortcut",
           "icon": "icon-rocket",
           "shortcut_root": true,
           "children": []
@@ -30,14 +29,12 @@
       ]
     },
     {
-      "text": "Basic",
-      "i18n": "basic",
+      "text": "基础",
       "icon": "icon-list",
       "group": false,
       "hideInBreadcrumb": true,
       "children": [{
-          "text": "query list",
-          "i18n": "query-list",
+          "text": "查询列表",
           "icon": "icon-list",
           "link": "/list/query-list"
         },
@@ -71,9 +68,16 @@
       "text": "安全",
       "group": true,
       "children": [{
-        "text": "csrf",
-        "link": "/security/csrf"
-      }]
+          "text": "登录",
+          "link": "/passport/login",
+          "reuse": false
+        },
+        {
+          "text": "安全模式测试",
+          "link": "/security/test_auth",
+          "reuse": false
+        }
+      ]
     },
     {
       "text": "测试",

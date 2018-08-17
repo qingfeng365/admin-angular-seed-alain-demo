@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { SecurityRoutingModule } from './security-routing.module';
-import { SecurityCsrfComponent } from './security-csrf/security-csrf.component';
+import { SecurityAuthComponent } from './security-auth/security-auth.component';
 
-const COMPONENTS = [];
+const COMPONENTS = [SecurityAuthComponent];
 const COMPONENTS_NOROUNT = [];
 
 @NgModule({
@@ -14,7 +14,6 @@ const COMPONENTS_NOROUNT = [];
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT,
-    SecurityCsrfComponent
   ],
   entryComponents: COMPONENTS_NOROUNT
 })

@@ -22,7 +22,7 @@ import { environment } from '@env/environment';
  */
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) { }
 
   get msg(): NzMessageService {
     return this.injector.get(NzMessageService);
@@ -64,7 +64,13 @@ export class DefaultInterceptor implements HttpInterceptor {
         this.goTo('/passport/login');
         break;
       case 403:
+        this.goTo(`/${event.status}`);
+        break;
       case 404:
+        this.goTo(`/${event.status}`);
+        break;
+      case 422:
+        break;
       case 500:
         this.goTo(`/${event.status}`);
         break;
@@ -78,18 +84,23 @@ export class DefaultInterceptor implements HttpInterceptor {
         }
         break;
     }
-    return of(event);
+    if (event instanceof HttpErrorResponse) {
+      return throwError(event.error || event);
+    } else {
+
+      return of(event);
+    }
   }
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<
-    | HttpSentEvent
-    | HttpHeaderResponse
-    | HttpProgressEvent
-    | HttpResponse<any>
-    | HttpUserEvent<any>
+  | HttpSentEvent
+  | HttpHeaderResponse
+  | HttpProgressEvent
+  | HttpResponse<any>
+  | HttpUserEvent<any>
   > {
     // 统一加上服务端前缀
     let url = req.url;
@@ -102,13 +113,16 @@ export class DefaultInterceptor implements HttpInterceptor {
     });
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {
+
         // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
         if (event instanceof HttpResponse && event.status === 200)
           return this.handleData(event);
         // 若一切都正常，则后续操作
         return of(event);
       }),
-      catchError((err: HttpErrorResponse) => this.handleData(err)),
+      catchError((err: HttpErrorResponse) => {
+        return this.handleData(err);
+      }),
     );
   }
 }

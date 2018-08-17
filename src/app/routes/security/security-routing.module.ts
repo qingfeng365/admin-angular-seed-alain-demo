@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SecurityCsrfComponent } from './security-csrf/security-csrf.component';
+import { SecurityAuthComponent } from './security-auth/security-auth.component';
 
 const routes: Routes = [
   {
-    path: 'csrf',
-    component: SecurityCsrfComponent,
+    path: 'test_auth',
+    component: SecurityAuthComponent,
   },
 ];
 

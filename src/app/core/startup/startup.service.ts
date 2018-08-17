@@ -12,6 +12,7 @@ import {
 import { ACLService } from '@delon/acl';
 import { TranslateService } from '@ngx-translate/core';
 import { I18NService } from '../i18n/i18n.service';
+import { ApiService } from '@core/api/api.service';
 
 /**
  * 用于应用启动时
@@ -28,6 +29,7 @@ export class StartupService {
     private titleService: TitleService,
     private httpClient: HttpClient,
     private injector: Injector,
+    private apiService: ApiService,
   ) { }
 
   load(): Promise<any> {
@@ -67,6 +69,8 @@ export class StartupService {
             this.menuService.add(res.menu);
             // 设置页面标题的后缀
             this.titleService.suffix = res.app.name;
+            // 设置后端服务器基本网址
+            this.apiService.setBaseUrl(res.apiServerBaseUrl);
 
           },
           () => { },

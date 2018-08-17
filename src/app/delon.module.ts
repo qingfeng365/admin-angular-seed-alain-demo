@@ -14,7 +14,7 @@ import { throwIfAlreadyLoaded } from '@core/module-import-guard';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AlainThemeModule } from '@delon/theme';
 import { DelonABCModule, ReuseTabService, ReuseTabStrategy } from '@delon/abc';
-import { DelonAuthModule } from '@delon/auth';
+import { DelonAuthModule, DA_STORE_TOKEN, MemoryStore } from '@delon/auth';
 import { DelonACLModule } from '@delon/acl';
 import { DelonCacheModule } from '@delon/cache';
 import { DelonUtilModule } from '@delon/util';
@@ -82,6 +82,8 @@ export class DelonModule {
         { provide: AdSimpleTableConfig, useFactory: simpleTableConfig },
         { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
         { provide: DelonAuthConfig, useFactory: delonAuthConfig },
+        // 认证 TOKEN,  用 sessionStorage 存储，关掉浏览器后丢失
+        { provide: DA_STORE_TOKEN, useClass: MemoryStore }
       ],
     };
   }

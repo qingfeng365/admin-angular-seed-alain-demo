@@ -1,0 +1,12 @@
+.container
+  .wrap
+    .top
+      .head
+        img.logo(src="./assets/logo-color.svg")
+        span.title Quick Admin
+      .desc 欢迎使用 Quick Admin 后台管理
+    router-outlet
+    global-footer([links]="links")
+      | Copyright
+      i.anticon.anticon-copyright
+      | 2010 - 2018

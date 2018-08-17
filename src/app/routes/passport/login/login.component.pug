@@ -1,0 +1,21 @@
+form(nz-form="", [formGroup]="form", (ngSubmit)="submit()",role="form")
+  nz-alert.mb-lg(*ngIf="error",[nzType]="'error'",[nzMessage]="error",
+    [nzShowIcon]="true")
+  nz-form-item
+    nz-form-control
+      nz-input-group(nzSize="large",nzPrefixIcon="anticon anticon-user")
+        input(nz-input="",formControlName="userName",placeholder="请输入账户名...(admin)")
+      nz-form-explain(*ngIf="userName.dirty && userName.errors") 请输入账户名！
+  nz-form-item
+    nz-form-control
+      nz-input-group(nzSize="large",nzPrefixIcon="anticon anticon-lock")
+        input(nz-input="",type="password",formControlName="password",placeholder="请输入密码...(admin)")
+      nz-form-explain(*ngIf="password.dirty && password.errors") 请输入密码！
+  nz-form-item
+    button.ant-btn__block(nz-button="",type="submit",nzType="primary", nzSize="large",
+      [nzLoading]="http.loading") 登录
+  nz-form-item
+    nz-col([nzSpan]="12")
+      a.forgot((click)="msg.error('该功能待实现...')") 忘记密码？
+    nz-col.text-right([nzSpan]="12")
+      a.register(routerLink="/passport/register") 注册账户
