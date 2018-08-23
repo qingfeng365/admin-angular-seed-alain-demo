@@ -11,7 +11,6 @@
   },
   "menu": [{
       "text": "主导航",
-      "i18n": "main_navigation",
       "group": true,
       "hideInBreadcrumb": true,
       "children": [{
@@ -76,6 +75,23 @@
           "text": "安全模式测试",
           "link": "/security/test_auth",
           "reuse": false
+        },
+        {
+          "text": "权限测试",
+          "link": "/security/test_right",
+          "reuse": false
+        },
+        {
+          "text": "档案管理员专用菜单",
+          "link": "",
+          "reuse": false,
+          "acl": "rule_manager"
+        },
+        {
+          "text": "后台用户管理员专用菜单",
+          "link": "",
+          "reuse": false,
+          "acl": "user_manager"
         }
       ]
     },
@@ -96,23 +112,19 @@
     },
     {
       "text": "样式",
-      "i18n": "style",
       "group": false,
       "icon": "icon-chemistry",
       "children": [{
-          "text": "Font Icons",
-          "link": "/style/iconsfont",
-          "i18n": "iconsfont"
+          "text": "图标",
+          "link": "/style/iconsfont"
         },
         {
-          "text": "Colors",
-          "link": "/style/colors",
-          "i18n": "colors"
+          "text": "色系",
+          "link": "/style/colors"
         },
         {
-          "text": "Typography",
+          "text": "排版",
           "link": "/style/typography",
-          "i18n": "typography",
           "shortcut": true
         }
       ]

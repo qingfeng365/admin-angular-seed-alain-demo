@@ -46,7 +46,7 @@ export class StartupService {
             resolve(null);
             return [langData, appData];
           }),
-      )
+        )
         .subscribe(
           ([langData, appData]) => {
 
@@ -64,7 +64,7 @@ export class StartupService {
             // 用户信息：包括姓名、头像、邮箱地址
             this.settingService.setUser(res.user);
             // ACL：设置权限为全量
-            this.aclService.setFull(true);
+            // this.aclService.setFull(true);
             // 初始化菜单
             this.menuService.add(res.menu);
             // 设置页面标题的后缀
@@ -77,7 +77,7 @@ export class StartupService {
           () => {
             resolve(null);
           },
-      );
+        );
     });
   }
 }
