@@ -15,13 +15,13 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "首页",
-          "icon": "icon-home",
+          "icon": "anticon anticon-home",
           "link": "/home",
           "hideInBreadcrumb": true
         },
         {
           "text": "快捷菜单",
-          "icon": "icon-rocket",
+          "icon": "anticon anticon-rocket",
           "shortcut_root": true,
           "children": []
         }
@@ -34,21 +34,21 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "查询列表",
-          "icon": "icon-list",
+          "icon": "anticon anticon-bars",
           "link": "/list/query-list"
         },
         {
           "text": "基础表单",
-          "icon": "icon-note",
+          "icon": "anticon anticon-edit ",
           "link": "/form/basic-form"
         },
         {
           "text": "基础详情页",
-          "icon": "icon-notebook",
+          "icon": "anticon anticon-file-text",
           "link": "/detail/basic"
         }, {
           "text": "高级详情页",
-          "icon": "icon-notebook",
+          "icon": "anticon anticon-file-text",
           "link": "/detail/advanced"
         }
       ]
@@ -59,7 +59,7 @@
       "hideInBreadcrumb": true,
       "children": [{
         "text": "基本-增删查改",
-        "icon": "icon-list",
+        "icon": "anticon anticon-bars",
         "link": "/basic-curd/list"
       }]
     },
@@ -112,8 +112,8 @@
     },
     {
       "text": "样式",
-      "group": false,
-      "icon": "icon-chemistry",
+      "group": true,
+      "icon": "anticon anticon-info",
       "children": [{
           "text": "图标",
           "link": "/style/iconsfont"
