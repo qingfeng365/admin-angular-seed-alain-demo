@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { SimpleTableData, SimpleTableColumn, SimpleTableComponent } from '@delon/abc';
+import { STComponent, STColumn, STData } from '@delon/abc';
 import { SortDef } from '../../../common-type';
 import * as _ from 'lodash';
 
@@ -76,9 +76,9 @@ export class QueryListComponent implements OnInit {
   // 条件面板是处于展开状态
   expandForm = false;
   // 当前用户选择的数据行
-  selectedRows: SimpleTableData[] = [];
+  selectedRows: STData[] = [];
 
-  @ViewChild('st') st: SimpleTableComponent;
+  @ViewChild('st') st: STComponent;
 
   stRecordTotal: number;
   stPageSize = 10;
@@ -95,7 +95,7 @@ export class QueryListComponent implements OnInit {
   //   currency 货币且居右；
   //   date 日期格式且居中；
   //   yn 将boolean类型徽章化
-  columns: SimpleTableColumn[] = [
+  columns: STColumn[] = [
     { title: '', index: 'key', type: 'checkbox' },
     { title: '规则编号', index: 'no' },
     { title: '描述', index: 'description' },
@@ -129,6 +129,8 @@ export class QueryListComponent implements OnInit {
       ],
     },
   ];
+
+  stres = { reName: { list: 'datas' }, process: this.preDataChange };
 
   /**
    *
@@ -191,7 +193,7 @@ export class QueryListComponent implements OnInit {
     this.st.reload(this.q);
   }
   // 采用 url 模式时,如果需要预处理
-  preDataChange(data: SimpleTableData[]) {
+  preDataChange(data: STData[]) {
     const status = self.status;
     return data.map(i => {
       const statusItem = status[i.status];
@@ -205,7 +207,7 @@ export class QueryListComponent implements OnInit {
     this.selectedRows = [];
     this.st.clearCheck();
   }
-  checkboxChange(list: SimpleTableData[]) {
+  checkboxChange(list: STData[]) {
     // checkboxChange 的 参数 list, 仅为当前页面的 选择列表
     this.selectedRows = _.uniqBy(_.concat(this.selectedRows, list), 'key');
 
@@ -230,7 +232,8 @@ export class QueryListComponent implements OnInit {
     const dataUrl = '/rule/all';
     // 注意: preDataChange 在这里是不会执行的, 因此
     // 建议尽量少用 preDataChange, 应在后端将数据处理好
-    this.st.export(dataUrl, { filename: 'query-list.xlsx' });
+    // this.st.export(dataUrl, { filename: 'query-list.xlsx' });
+    this.st.export();
 
   }
 

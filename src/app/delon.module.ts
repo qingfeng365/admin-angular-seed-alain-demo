@@ -14,6 +14,8 @@ import { throwIfAlreadyLoaded } from '@core/module-import-guard';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AlainThemeModule } from '@delon/theme';
 import { DelonABCModule, ReuseTabService, ReuseTabStrategy } from '@delon/abc';
+import { DelonChartModule } from '@delon/chart';
+
 import { DelonAuthModule, DA_STORE_TOKEN, MemoryStore } from '@delon/auth';
 import { DelonACLModule } from '@delon/acl';
 import { DelonCacheModule } from '@delon/cache';
@@ -26,19 +28,18 @@ const MOCKMODULE = !environment.production ? [DelonMockModule.forRoot({ data: MO
 
 // region: global config functions
 
-import { AdPageHeaderConfig } from '@delon/abc';
-export function pageHeaderConfig(): AdPageHeaderConfig {
-  return Object.assign(new AdPageHeaderConfig(),
-    { home_i18n: 'home', autoBreadcrumb: false, titleSync: true });
+import { PageHeaderConfig } from '@delon/abc';
+export function fnPageHeaderConfig(): PageHeaderConfig {
+  return Object.assign(new PageHeaderConfig(), { homeI18n: 'home' });
 }
 
-import { AdSimpleTableConfig } from '@delon/abc';
-export function simpleTableConfig(): AdSimpleTableConfig {
-  return Object.assign(new AdSimpleTableConfig(), {});
+import { STConfig } from '@delon/abc';
+export function fnSTConfig(): STConfig {
+  return Object.assign(new STConfig(), {});
 }
 
 import { DelonAuthConfig } from '@delon/auth';
-export function delonAuthConfig(): DelonAuthConfig {
+export function fnDelonAuthConfig(): DelonAuthConfig {
   return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
     login_url: '/passport/login',
   });
@@ -51,6 +52,7 @@ export function delonAuthConfig(): DelonAuthConfig {
     NgZorroAntdModule.forRoot(),
     AlainThemeModule.forRoot(),
     DelonABCModule.forRoot(),
+    DelonChartModule.forRoot(),
     DelonAuthModule.forRoot(),
     DelonACLModule.forRoot(),
     DelonCacheModule.forRoot(),
@@ -78,10 +80,10 @@ export class DelonModule {
           useClass: ReuseTabStrategy,
           deps: [ReuseTabService],
         },
-        // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
-        { provide: AdSimpleTableConfig, useFactory: simpleTableConfig },
-        { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
-        { provide: DelonAuthConfig, useFactory: delonAuthConfig },
+        // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `st` 的页码默认为 `20` 行
+        { provide: STConfig, useFactory: fnSTConfig },
+        { provide: PageHeaderConfig, useFactory: fnPageHeaderConfig },
+        { provide: DelonAuthConfig, useFactory: fnDelonAuthConfig },
         // 认证 TOKEN,  用 sessionStorage 存储，关掉浏览器后丢失
         { provide: DA_STORE_TOKEN, useClass: MemoryStore }
       ],

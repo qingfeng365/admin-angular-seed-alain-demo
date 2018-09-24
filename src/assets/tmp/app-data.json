@@ -21,8 +21,9 @@
         },
         {
           "text": "快捷菜单",
-          "icon": "anticon anticon-rocket",
-          "shortcut_root": true,
+          "i18n": "shortcut",
+          "icon": "anticon antanticon anticon-rocket",
+          "shortcutRoot": true,
           "children": []
         }
       ]
@@ -30,7 +31,7 @@
     {
       "text": "基础",
       "icon": "icon-list",
-      "group": false,
+      "group": true,
       "hideInBreadcrumb": true,
       "children": [{
           "text": "查询列表",

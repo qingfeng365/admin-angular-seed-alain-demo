@@ -117,10 +117,14 @@ export class BasicCurdEditModalComponent implements OnInit {
 
     this.ui = {
       '*': {
-        spanLabelFixed: 100,
+        // spanLabelFixed: 100,
+        // spanLabel: 5,
+        // offsetControl: 1,
+        // spanControl: 18,
         debug: true,
         grid: {
           span: 12,
+          gutter: 8,
         },
       },
       $no: {
@@ -142,6 +146,8 @@ export class BasicCurdEditModalComponent implements OnInit {
       },
       $description: {
         widget: 'textarea',
+        spanLabel: 3,
+        spanControl: 21,
         grid: { span: 24 },
       },
     };

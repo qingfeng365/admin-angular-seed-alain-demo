@@ -12,6 +12,10 @@ import { ScrollService, MenuService, SettingsService } from '@delon/theme';
 @Component({
   selector: 'layout-default',
   templateUrl: './default.component.html',
+  preserveWhitespaces: false,
+  host: {
+    '[class.alain-default]': 'true',
+  },
 })
 export class LayoutDefaultComponent {
   isFetching = false;

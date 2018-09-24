@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SortDef } from 'app/common-type';
-import { SimpleTableData, SimpleTableComponent, SimpleTableColumn } from '@delon/abc';
+import { STComponent, STColumn, STData } from '@delon/abc';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd';
 import { map, tap } from 'rxjs/operators';
@@ -85,10 +85,10 @@ export class BasicCurdListComponent implements OnInit {
   /** 表格是否处于 loading */
   loading = false;
   /** 当前用户选择的数据行 */
-  selectedRows: SimpleTableData[] = [];
+  selectedRows: STData[] = [];
 
   /** 表格模板变量 */
-  @ViewChild('st') st: SimpleTableComponent;
+  @ViewChild('st') st: STComponent;
 
   /** 表格数据总量, 用于表格计算分页显示*/
   stRecordTotal: number;
@@ -121,7 +121,7 @@ export class BasicCurdListComponent implements OnInit {
    * yn 将boolean类型徽章化
    *
    */
-  columns: SimpleTableColumn[] = [
+  columns: STColumn[] = [
     { title: '', index: 'key', type: 'checkbox' },
     { title: '规则编号', index: 'no' },
     { title: '描述', index: 'description' },
@@ -249,7 +249,7 @@ export class BasicCurdListComponent implements OnInit {
         // tap 跟 do 是一样的
         // tap(名词) 表示 窃听, 录音, 语义上更明确
         tap(() => (this.loading = false)),
-    )
+      )
       .subscribe(res => {
         this.stRecordTotal = res.total;
         this.stPageCurrNumber = res.datas.length === 0 ? 0 : this.q.pi;
@@ -291,7 +291,7 @@ export class BasicCurdListComponent implements OnInit {
     this.selectedRows = [];
     this.st.clearCheck();
   }
-  checkboxChange(list: SimpleTableData[]) {
+  checkboxChange(list: STData[]) {
     // checkboxChange 的 参数 list, 仅为当前页面的 选择列表
     this.selectedRows = _.uniqBy(_.concat(this.selectedRows, list), 'key');
 
@@ -336,7 +336,7 @@ export class BasicCurdListComponent implements OnInit {
 
           return { datas: newDatas };
         }),
-    )
+      )
       .subscribe(res => {
         this.st.export(res.datas, { filename: 'basic-curd-list.xlsx' });
       });
@@ -352,7 +352,7 @@ export class BasicCurdListComponent implements OnInit {
         BasicCurdEditModalComponent,
         {
           record: { isNew: true }
-        }, )
+        })
       .subscribe(modalResult => {
         console.log('add data:', modalResult);
         this.http

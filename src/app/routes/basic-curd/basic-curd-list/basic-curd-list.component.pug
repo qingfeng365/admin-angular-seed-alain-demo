@@ -100,15 +100,12 @@ nz-card([nzBordered]="false")
   //- 且不使用表格列排序和筛选功能
   //- 且不启用固定列功能(因有缺陷)
   //- #st 使用模块本地变量, 在代码中引用 simple-table 组件
-  simple-table(#st="",[columns]="columns", [data]="data",
+  st(#st="",[columns]="columns", [data]="data",
     [loading]="loading", (checkboxChange)="checkboxChange($event)",
     (change)="change($event)",
-    [frontPagination]="false",
     [total]="stRecordTotal",
     [pi]="stPageCurrNumber",
-    [showSizeChanger]="true",
-    [showQuickJumper]="true",
-    [showPagination]="true")
+    [page]="{showSize: true, showQuickJumper: true, front: false,showPagination: true}")
     //- simple-table 内部的 ng-template 允许接收 `$implicit`(数据行,缺省值"")、`index`、`column`(列定义) 三个值。
     //- 原示例 仅写 `let-i` 是 let-i = "$implicit" 的简写, 即在结构性指令中的 "let i = $implicit"
     //- $implicit 是 angular 微语法的隐含对象,表示 *ngFor 的当前对象

@@ -10,18 +10,18 @@ nz-tabset.mb-lg((nzSelectedIndexChange)="selectStyleIndex($event)",
     | 适合字段内容都比较长,或者高度不一致的情况
 //- 显示 loading ...
 nz-spin.modal-spin(*ngIf!="!data")
-desc-list(*ngIf!="data",
+sv-container(*ngIf!="data",
   [layout]="dlLayout",[col]="dlCol")
-  desc-list-item(term="key") {{data.key}}
-  desc-list-item(term="编号") {{data.no}}
-  desc-list-item(term="姓名") {{data.owner}}
-  desc-list-item(term="头像")
+  sv(label="key") {{data.key}}
+  sv(label="编号") {{data.no}}
+  sv(label="姓名") {{data.owner}}
+  sv(label="头像")
     img([_src]="data.avatar")
-  desc-list-item(term="任务") {{data.title}}
-  desc-list-item(term="状态") {{data.statusText}}
-  desc-list-item(term="链接") {{data.href}}
-  desc-list-item(term="调用次数") {{data.callNo}}万
-  desc-list-item(term="进度") {{data.progress}}％
-  desc-list-item(term="描述") {{data.description}}
-  desc-list-item(term="更新日期") {{data.updatedAt | _date:'YYYY-MM-DD'}}
-  desc-list-item(term="创建日期") {{data.createdAt | _date:'YYYY-MM-DD'}}
+  sv(label="任务") {{data.title}}
+  sv(label="状态") {{data.statusText}}
+  sv(label="链接") {{data.href}}
+  sv(label="调用次数") {{data.callNo}}万
+  sv(label="进度") {{data.progress}}％
+  sv(label="描述") {{data.description}}
+  sv(label="更新日期") {{data.updatedAt | _date:'YYYY-MM-DD'}}
+  sv(label="创建日期") {{data.createdAt | _date:'YYYY-MM-DD'}}

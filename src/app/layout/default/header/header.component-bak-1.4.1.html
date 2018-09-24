@@ -1,0 +1,39 @@
+
+<div class="logo"><a [routerLink]="['/']"><span class="logoexpanded d-inline-flex align-items-center"><span class="logotext expanded">Quick Admin</span></span><img class="collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}" style="max-height:30px;"/></a></div>
+<div class="top-nav-wrap">
+  <ul class="top-nav">
+    <li>
+      <div class="item" (click)="toggleCollapsedSidebar()"><i class="anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i></div>
+    </li>
+    <li class="hidden-xs">
+      <div class="item" [routerLink]="['/lock']"><i class="anticon anticon-lock"></i></div>
+    </li>
+  </ul>
+  <ul class="top-nav">
+    <li>
+      <header-notify></header-notify>
+    </li>
+    <li class="hidden-xs">
+      <header-task></header-task>
+    </li>
+    <li class="hidden-xs">
+      <nz-dropdown nztrigger="click" nzplacement="bottomRight">
+        <div class="item" nz-dropdown=""><i class="anticon anticon-setting"></i></div>
+        <div nz-menu="" style="width:200px;">
+          <div nz-menu-item="">
+            <header-fullscreen></header-fullscreen>
+          </div>
+          <div nz-menu-item="">
+            <header-storage></header-storage>
+          </div>
+          <div nz-menu-item="">
+            <header-i18n></header-i18n>
+          </div>
+        </div>
+      </nz-dropdown>
+    </li>
+    <li class="hidden-xs">
+      <header-user></header-user>
+    </li>
+  </ul>
+</div>

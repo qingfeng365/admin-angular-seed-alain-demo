@@ -1,7 +1,6 @@
 <div class="alain-default__header-logo">
   <a [routerLink]="['/']" class="alain-default__header-logo-link">
-    <!-- <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}" style="max-height:40px;" /> -->
-    <span class="alain-default__header-logo-expanded logotext">Quick Admin</span>
+    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}" style="max-height:40px;" />
     <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}" style="max-height:30px;" />
   </a>
 </div>
@@ -13,14 +12,26 @@
         <i class="anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
       </div>
     </li>
+    <!-- Github Page -->
+    <li>
+      <a class="alain-default__nav-item" href="//github.com/ng-alain/ng-alain" target="_blank">
+        <i class="anticon anticon-github"></i>
+      </a>
+    </li>
     <!-- Lock Page -->
     <li class="hidden-mobile">
       <div class="alain-default__nav-item" [routerLink]="['/lock']">
         <i class="anticon anticon-lock"></i>
       </div>
     </li>
+    <!-- Search Button -->
+    <li class="header-search__btn" (click)="searchToggleChange()">
+      <div class="alain-default__nav-item">
+        <i class="anticon anticon-search"></i>
+      </div>
+    </li>
   </ul>
-  <!-- <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search> -->
+  <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search>
   <ul class="alain-default__nav">
     <!-- Notify -->
     <li>
@@ -31,9 +42,9 @@
       <header-task></header-task>
     </li>
     <!-- App Icons -->
-    <!-- <li class="hidden-mobile">
+    <li class="hidden-mobile">
       <header-icon></header-icon>
-    </li> -->
+    </li>
     <!-- Settings -->
     <li class="hidden-mobile">
       <nz-dropdown nzTrigger="click" nzPlacement="bottomRight">
@@ -47,9 +58,9 @@
           <div nz-menu-item>
             <header-storage></header-storage>
           </div>
-          <!-- <div nz-menu-item>
+          <div nz-menu-item>
             <header-i18n></header-i18n>
-          </div> -->
+          </div>
         </div>
       </nz-dropdown>
     </li>

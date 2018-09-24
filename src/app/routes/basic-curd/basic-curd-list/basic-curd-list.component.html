@@ -83,9 +83,9 @@
       </nz-alert>
     </nz-col>
   </nz-row>
-  <simple-table #st="" [columns]="columns" [data]="data" [loading]="loading" (checkboxChange)="checkboxChange($event)" (change)="change($event)" [frontPagination]="false" [total]="stRecordTotal" [pi]="stPageCurrNumber" [showSizeChanger]="true" [showQuickJumper]="true" [showPagination]="true">
+  <st #st="" [columns]="columns" [data]="data" [loading]="loading" (checkboxChange)="checkboxChange($event)" (change)="change($event)" [total]="stRecordTotal" [pi]="stPageCurrNumber" [page]="{showSize: true, showQuickJumper: true, front: false,showPagination: true}">
     <ng-template st-row="status" let-i="">
       <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
     </ng-template>
-  </simple-table>
+  </st>
 </nz-card>
