@@ -53,7 +53,8 @@
           "link": "/detail/advanced"
         }
       ]
-    }, {
+    },
+    {
       "text": "综合",
       "group": true,
       "hideInBreadcrumb": true,
@@ -108,9 +109,10 @@
               "i18n": "pro-account-settings"
             }
           ]
-        }
+        },
       ]
-    }, {
+    },
+    {
       "text": "测试",
       "group": false,
       "icon": "icon-question",
@@ -124,7 +126,8 @@
           "link": "/trade/list"
         }
       ]
-    }, {
+    },
+    {
       "text": "样式",
       "group": true,
       "icon": "anticon anticon-info",
@@ -143,6 +146,5 @@
         }
       ]
     }
-
   ]
 }

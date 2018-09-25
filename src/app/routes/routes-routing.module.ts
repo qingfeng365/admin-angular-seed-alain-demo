@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: 'detail', loadChildren: './detail/detail.module#DetailModule' },
       { path: 'basic-curd', loadChildren: './basic-curd/basic-curd.module#BasicCurdModule' },
       { path: 'security', loadChildren: './security/security.module#SecurityModule' },
+      { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
     ],
   },
   // 全屏布局
