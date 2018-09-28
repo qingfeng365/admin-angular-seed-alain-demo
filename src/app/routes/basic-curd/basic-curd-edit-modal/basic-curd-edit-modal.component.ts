@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
-import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
+import { NzModalRef, NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import * as _ from 'lodash';
 
@@ -38,6 +38,7 @@ export class BasicCurdEditModalComponent implements OnInit {
     private modal: NzModalRef,
     public msgSrv: NzMessageService,
     public http: _HttpClient,
+    private modalService: NzModalService,
   ) { }
 
   ngOnInit() {
@@ -95,6 +96,10 @@ export class BasicCurdEditModalComponent implements OnInit {
     this.sfLayout = 'horizontal';
     this.schema = {
       properties: {
+        selectbtn: {
+          type: 'string',
+          title: '图片',
+        },
         no: { type: 'string', title: '编号' },
         owner: { type: 'string', title: '姓名', maxLength: 15 },
         status: {
@@ -117,7 +122,7 @@ export class BasicCurdEditModalComponent implements OnInit {
 
     this.ui = {
       '*': {
-        // spanLabelFixed: 100,
+        spanLabelFixed: 100,
         // spanLabel: 5,
         // offsetControl: 1,
         // spanControl: 18,
@@ -126,6 +131,9 @@ export class BasicCurdEditModalComponent implements OnInit {
           span: 12,
           gutter: 8,
         },
+      },
+      $selectbtn: {
+        widget: 'custom',
       },
       $no: {
         widget: this.isInNewState ? 'string' : 'text',
@@ -156,6 +164,7 @@ export class BasicCurdEditModalComponent implements OnInit {
     this.sfLayout = 'vertical';
     this.schema = {
       properties: {
+
         no: { type: 'string', title: '编号' },
         owner: { type: 'string', title: '姓名', maxLength: 15 },
         status: {
@@ -284,6 +293,17 @@ export class BasicCurdEditModalComponent implements OnInit {
   }
   close() {
     this.modal.destroy();
+  }
+
+  onImagebtnClick(me, ui, schema) {
+    console.log(me);
+    console.log(ui);
+    console.log(schema);
+    this.modalService.info({
+      nzTitle: 'This is a notification message',
+      nzContent: '<p>some messages...some messages...</p><p>some messages...some messages...</p>',
+      nzOnOk: () => console.log('Info OK')
+    });
   }
 
 }

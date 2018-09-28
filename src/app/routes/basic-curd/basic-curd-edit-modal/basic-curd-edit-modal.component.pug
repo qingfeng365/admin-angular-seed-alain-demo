@@ -18,6 +18,11 @@ sf(*ngIf!="data && (!styleChanging)", #sf="",
   [layout]="sfLayout",
   [firstVisual]="false",
   [liveValidate]="true")
+  ng-template(sf-template="selectbtn",
+    let-me="",
+    let-ui="ui",
+    let-schema="schema")
+    button(nz-button="",nzType="primary",(click)="onImagebtnClick(me,ui,schema)") 选择
   .modal-footer
     button(nz-button="", type="button", (click)="close()") 关闭
     button(nz-button="", type="submit", [nzType]="'primary'",

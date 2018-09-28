@@ -9,6 +9,9 @@
 </nz-tabset>
 <nz-spin class="modal-spin" *ngIf="!data || styleChanging"></nz-spin>
 <sf *ngIf="data && (!styleChanging)" #sf="" [schema]="schema" [ui]="ui" [formData]="data" button="none" [layout]="sfLayout" [firstVisual]="false" [liveValidate]="true">
+  <ng-template sf-template="selectbtn" let-me="" let-ui="ui" let-schema="schema">
+    <button nz-button="" nzType="primary" (click)="onImagebtnClick(me,ui,schema)">选择</button>
+  </ng-template>
   <div class="modal-footer">
     <button nz-button="" type="button" (click)="close()">关闭</button>
     <button nz-button="" type="submit" [nzType]="'primary'" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading">保存</button>

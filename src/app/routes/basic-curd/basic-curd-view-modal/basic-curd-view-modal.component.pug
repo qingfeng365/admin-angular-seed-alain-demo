@@ -10,7 +10,7 @@ nz-tabset.mb-lg((nzSelectedIndexChange)="selectStyleIndex($event)",
     | 适合字段内容都比较长,或者高度不一致的情况
 //- 显示 loading ...
 nz-spin.modal-spin(*ngIf!="!data")
-sv-container(*ngIf!="data",
+sv-container(*ngIf!="data && !styleChanging",
   [layout]="dlLayout",[col]="dlCol")
   sv(label="key") {{data.key}}
   sv(label="编号") {{data.no}}

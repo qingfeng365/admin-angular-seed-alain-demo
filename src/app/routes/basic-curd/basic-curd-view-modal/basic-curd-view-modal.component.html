@@ -8,7 +8,7 @@
   <nz-tab nzTitle="一栏">适合字段内容都比较长,或者高度不一致的情况</nz-tab>
 </nz-tabset>
 <nz-spin class="modal-spin" *ngIf="!data"></nz-spin>
-<sv-container *ngIf="data" [layout]="dlLayout" [col]="dlCol">
+<sv-container *ngIf="data && !styleChanging" [layout]="dlLayout" [col]="dlCol">
   <sv label="key">{{data.key}}</sv>
   <sv label="编号">{{data.no}}</sv>
   <sv label="姓名">{{data.owner}}</sv>

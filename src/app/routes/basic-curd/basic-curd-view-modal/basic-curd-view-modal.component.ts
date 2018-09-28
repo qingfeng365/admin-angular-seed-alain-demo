@@ -26,6 +26,7 @@ export class BasicCurdViewModalComponent implements OnInit {
   styleIndex = 0;
   dlLayout = 'horizontal';
   dlCol = 3;
+
   styleChanging = false;
   constructor(
     private modal: NzModalRef,
@@ -43,7 +44,7 @@ export class BasicCurdViewModalComponent implements OnInit {
           res.statusType = statusItem.type;
           return res;
         }),
-    )
+      )
       .subscribe(
         (res: any) => (this.data = res));
   }
@@ -65,8 +66,17 @@ export class BasicCurdViewModalComponent implements OnInit {
     }
   }
   selectStyleIndex(styleIndex: number) {
+
+
     this.styleIndex = styleIndex;
+
+    console.log('selectStyleIndex:', this.styleIndex);
+
+    this.styleChanging = true;
     this.resetStyle();
+    setTimeout(() => {
+      this.styleChanging = false;
+    }, 0);
   }
 
   setStyle0(): void {
