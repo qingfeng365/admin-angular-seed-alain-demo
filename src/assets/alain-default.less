@@ -2272,9 +2272,9 @@ darker  @grey-9;
 @zindex:            @zindex-base;
 
 // 文本
-@text-sm:       @font-size-base + 0; // 12px
-@text-md:       @font-size-base + 2; // 14px
-@text-lg:       @font-size-base + 4; // 16px
+@text-sm:       @font-size-base + 0; // 14px
+@text-md:       @font-size-base + 2; // 16px
+@text-lg:       @font-size-base + 4; // 18px
 
 // icon
 @icon-sm:       @font-size-base * 2; // 24px
@@ -2344,11 +2344,15 @@ darker  @grey-9;
 // masonry
 @masonry-column-gap:  @layout-gutter * 2;
 
-// Modal
 @modal-xl:                    1200px;
 @modal-lg:                    900px;
 @modal-md:                    600px;
 @modal-sm:                    300px;
+
+@drawer-xl:                    1200px;
+@drawer-lg:                    900px;
+@drawer-md:                    600px;
+@drawer-sm:                    300px;
 
 // alain
 // placeholder
@@ -18934,38 +18938,113 @@ span.@{radio-prefix-cls} + * {
 }
 
 // antd patch
-.ant-card {
-  margin-bottom: @md;
-}
+.preserve-white-spaces-mixin(@enabled) when(@enabled=true) {
+  // 搜索框与表格
+  @sf-and-st-white-spacing: @layout-gutter * 2;
 
-nz-card {
-  margin-bottom: @md !important;
-}
+  sf + st {
+    margin-top: @sf-and-st-white-spacing;
+  }
 
-// 标题为图片
-.ant-card__title-img {
-  .ant-card-head-title {
-    img {
-      vertical-align: middle;
+  // 按钮间间距
+  @button-and-button-white-spacing: @layout-gutter;
+
+  .ant-btn + .ant-btn,
+  .ant-btn + nz-popconfirm,
+  nz-popconfirm + .ant-btn,
+  nz-popconfirm + nz-popconfirm {
+    margin-left: @button-and-button-white-spacing;
+  }
+  .ant-btn-group {
+    .ant-btn + .ant-btn {
+      margin-left: -1px;
     }
   }
 }
 
-// 图片式
-.ant-card__img {
-  .ant-card-body {
-    padding: 0;
-  }
-  .img {
-    max-width: 100%;
-    vertical-align: middle;
-  }
+.preserve-white-spaces-mixin(@preserve-white-spaces-enabled);
+
+.ant-card {
+  margin-bottom: @md;
 }
 
 // Body no padding
 .ant-card__body-nopadding {
   .ant-card-body {
     padding: 0 !important;
+  }
+}
+
+@media (min-width: @drawer-sm) {
+  .drawer-sm {
+    max-width: @drawer-sm;
+    width: auto !important;
+  }
+}
+@media (max-width: @drawer-sm - 1) {
+  .drawer-sm {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: @drawer-md) {
+  .drawer-md {
+    max-width: @drawer-md;
+    width: auto !important;
+  }
+}
+@media (max-width: @drawer-md - 1) {
+  .drawer-md {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: @drawer-lg) {
+  .drawer-lg {
+    max-width: @drawer-lg;
+    width: auto !important;
+  }
+}
+@media (max-width: @drawer-lg - 1) {
+  .drawer-lg {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: @drawer-xl) {
+  .drawer-xl {
+    max-width: @drawer-xl;
+    width: auto !important;
+  }
+}
+@media (max-width: @drawer-xl - 1) {
+  .drawer-xl {
+    width: 100% !important;
+  }
+}
+
+.drawer {
+  &-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: @border-width-base @border-style-base @border-color-split;
+    padding: 10px 16px;
+    text-align: right;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+    background: #fff;
+  }
+}
+.ant-form-item-label {
+  em {
+    color: @grey-6;
+  }
+}
+
+.ant-form-item-children {
+  em {
+    margin-left: @layout-gutter;
   }
 }
 
@@ -18993,7 +19072,7 @@ nz-card {
   }
 }
 
-// Extra extra large screen / large descktop
+// Extra large screen / large descktop
 @media (min-width: @screen-xxl) {
   .modal-xl .ant-modal {
     max-width: @modal-xl;
@@ -19045,30 +19124,6 @@ nz-card {
     .ant-modal-body {
       padding: 0 !important;
     }
-  }
-}
-
-nz-carousel[class^='nz-carousel__dot-'] {
-  .slick-dots li button {
-    background: @grey-10;
-  }
-}
-
-// Block
-.ant-btn__block {
-  display: block !important;
-  width: 100%;
-}
-
-.ant-form-item-label {
-  em {
-    color: @grey-6;
-  }
-}
-
-.ant-form-item-children {
-  em {
-    margin-left: @layout-gutter;
   }
 }
 
@@ -19147,32 +19202,6 @@ nz-carousel[class^='nz-carousel__dot-'] {
     }
   }
 }
-
-.preserve-white-spaces-mixin(@enabled) when(@enabled=true) {
-  // 搜索框与表格
-  @sf-and-st-white-spacing: @layout-gutter * 2;
-
-  sf + st {
-    margin-top: @sf-and-st-white-spacing;
-  }
-
-  // 按钮间间距
-  @button-and-button-white-spacing: @layout-gutter;
-
-  .ant-btn + .ant-btn,
-  .ant-btn + nz-popconfirm,
-  nz-popconfirm + .ant-btn,
-  nz-popconfirm + nz-popconfirm {
-    margin-left: @button-and-button-white-spacing;
-  }
-  .ant-btn-group {
-    .ant-btn + .ant-btn {
-      margin-left: -1px;
-    }
-  }
-}
-
-.preserve-white-spaces-mixin(@preserve-white-spaces-enabled);
 
 // Core CSS
 // https://github.com/angular/angular/issues/9845
@@ -19373,26 +19402,6 @@ fieldset {
     .loopColumn();
   }
 });
-
-// Placeholder container
-.box-placeholder {
-  margin-bottom: @placeholder-margin-vertical;
-  padding: @placeholder-padding;
-  border: 1px dashed @placeholder-border;
-  background: @placeholder-background;
-  color: @placeholder-color;
-}
-
-// Remove margin from the last-child
-.box-placeholder > :last-child {
-  margin-bottom: 0;
-}
-
-// Variant
-.box-placeholder-lg {
-  padding-top: @placeholder-large-padding-vertical;
-  padding-bottom: @placeholder-large-padding-vertical;
-}
 
 .no-data {
   color: rgba(0, 0, 0, 0.25);
@@ -20843,8 +20852,6 @@ body {
 
 }
 
-// @import../../theme/styles/default';
-
 @st-prefix: ~'.st';
 
 @{st-prefix} {
@@ -20868,8 +20875,6 @@ body {
     margin-bottom: 0;
   }
 }
-
-// @import../../theme/styles/default';
 
 @sv-prefix: ~'.sv';
 @sv-label-color: @heading-color;
@@ -20989,8 +20994,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 @se-prefix: ~'.se';
 @se-label-color: rgba(0, 0, 0, 0.85);
 @se-compact-bottom: @layout-gutter;
@@ -21094,7 +21097,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
 @avatar-list-prefix: ~'.avatar-list';
 
 @{avatar-list-prefix} {
@@ -21134,20 +21136,16 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
 .ellipsis {
   overflow: hidden;
   display: -webkit-box;
 }
 
-// @import../../theme/styles/default';
 .error-collect {
   color: #f5222d;
   padding-right: 24px;
   cursor: pointer;
 }
-
-// @import../../theme/styles/default';
 
 @exception-prefix: ~'.exception';
 @{exception-prefix} {
@@ -21231,8 +21229,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 @footer-toolbar-prefix: ~'.footer-toolbar';
 @footer-toolbar-height: 56px;
 @footer-toolbar-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.03);
@@ -21259,8 +21255,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 @full-content-prefix: ~'.full-content';
 
 @{full-content-prefix} {
@@ -21275,8 +21269,6 @@ body {
   &__hidden-title {
   }
 }
-
-// @import../../theme/styles/default';
 
 @global-footer-prefix: ~'.global-footer';
 
@@ -21304,8 +21296,6 @@ body {
     font-size: @font-size-base;
   }
 }
-
-// @import../../theme/styles/default';
 
 @notice-icon-prefix: ~'.notice-icon';
 
@@ -21412,8 +21402,6 @@ body {
     }
   }
 }
-
-// @import../../theme/styles/default';
 
 @page-header-prefix: ~'.page-header';
 @page-header-bg: #fff;
@@ -21548,8 +21536,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 @quick-menu-prefix: ~'.quick-menu';
 @quick-menu-border-width: 1px;
 @quick-menu-ctrl-hw: 50px;
@@ -21586,7 +21572,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
 .qr {
   display: inline-block;
   &__img {
@@ -21594,8 +21579,6 @@ body {
     max-height: 100%;
   }
 }
-
-// @import../../theme/styles/default';
 
 @result-extra-bg: #fafafa;
 
@@ -21655,8 +21638,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 @reuse-tab-prefix:          ~'.reuse-tab';
 @reuse-tab-height:          52px;
 @reuse-tab-bg:              #fff;
@@ -21702,8 +21683,6 @@ body {
   }
 }
 
-// @import../../theme/styles/default';
-
 .tag-select {
   user-select: none;
   margin-left: -8px;
@@ -21741,7 +21720,9 @@ g2-gauge,
 g2-mini-area,
 g2-mini-bar,
 g2-tag-cloud,
-g2-timeline {
+g2-timeline,
+g2,
+g2-custom {
   display: block;
 }
 
@@ -21749,8 +21730,6 @@ g2-bar,
 g2-tag-cloud {
   width: 100%;
 }
-
-// @import../../theme/styles/index.less';
 
 @g2-card-prefix: ~'.g2-card';
 
@@ -21817,7 +21796,6 @@ g2-tag-cloud {
   }
 }
 
-// @import../../theme/styles/index.less';
 @g2-mini-progress-prefix: ~'.g2-mini-progress';
 @{g2-mini-progress-prefix} {
   display: block;
@@ -21853,8 +21831,6 @@ g2-tag-cloud {
     }
   }
 }
-
-// @import../../theme/styles/index.less';
 
 @g2-pie-prefix: ~'.g2-pie';
 
@@ -21951,8 +21927,6 @@ g2-tag-cloud {
   }
 }
 
-// @import../../theme/styles/index.less';
-
 @g2-radar-prefix: ~'.g2-radar';
 
 @{g2-radar-prefix} {
@@ -21998,8 +21972,6 @@ g2-tag-cloud {
   }
 }
 
-// @import../../theme/styles/index.less';
-
 @g2-water-wave-prefix: ~'.g2-water-wave';
 
 @{g2-water-wave-prefix} {
@@ -22028,8 +22000,6 @@ g2-tag-cloud {
     transform-origin: 0 0;
   }
 }
-
-// @import../../theme/styles/default';
 
 @number-info-prefix: ~'.number-info';
 @{number-info-prefix} {
@@ -22096,8 +22066,6 @@ g2-tag-cloud {
   }
 }
 
-// @import../../theme/styles/default';
-
 @trend-prefix: ~'.trend';
 
 @{trend-prefix} {
@@ -22136,3 +22104,8 @@ g2-tag-cloud {
     }
   }
 }
+
+/* You can add global styles to this file, and also import other style files */
+
+// 可以通过 https://ng-alain.github.io/ng-alain/ 获取主题参数代码
+// The theme paraments can be generated at https://ng-alain.github.io/ng-alain/

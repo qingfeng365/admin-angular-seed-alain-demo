@@ -25,7 +25,8 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "e2e": "ng e2e",
     "test": "ng test --watch",
-    "test-coverage": "ng test --code-coverage --watch=false"
+    "test-coverage": "ng test --code-coverage --watch=false",
+    "color-less": "node scripts/color-less.js"
   },
   "dependencies": {
     "@angular/animations": "^6.1.0",
@@ -40,21 +41,21 @@
     "@antv/data-set": "^0.8.8",
     "@antv/g2": "^3.0.11",
     "@antv/g2-plugin-slider": "^2.0.2",
-    "@delon/abc": "^2.0.0-beta.2",
-    "@delon/acl": "^2.0.0-beta.2",
-    "@delon/auth": "^2.0.0-beta.2",
-    "@delon/cache": "^2.0.0-beta.2",
-    "@delon/chart": "^2.0.0-beta.1",
-    "@delon/form": "^2.0.0-beta.2",
-    "@delon/mock": "^2.0.0-beta.2",
-    "@delon/theme": "^2.0.0-beta.2",
-    "@delon/util": "^2.0.0-beta.2",
+    "@delon/abc": "^2.0.0-rc.1",
+    "@delon/acl": "^2.0.0-rc.1",
+    "@delon/auth": "^2.0.0-rc.1",
+    "@delon/cache": "^2.0.0-rc.1",
+    "@delon/chart": "^2.0.0-rc.1",
+    "@delon/form": "^2.0.0-rc.1",
+    "@delon/mock": "^2.0.0-rc.1",
+    "@delon/theme": "^2.0.0-rc.1",
+    "@delon/util": "^2.0.0-rc.1",
     "@ngx-translate/core": "^10.0.1",
     "@ngx-translate/http-loader": "^3.0.1",
     "ajv": "^6.4.0",
     "core-js": "^2.5.4",
     "file-saver": "^1.3.8",
-    "ng-zorro-antd": "^1.6.0",
+    "ng-zorro-antd": "^1.7.0",
     "ngx-countdown": "^3.0.0",
     "ngx-tinymce": "^2.0.0",
     "ngx-ueditor": "^2.0.0",
@@ -81,7 +82,7 @@
     "gh-pages": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-pug": "^4.0.1",
-    "husky": "^0.14.3",
+    "husky": "^1.1.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -90,8 +91,9 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lint-staged": "^7.1.0",
+    "less-bundle-promise": "^1.0.7",
     "mockjs": "^1.0.1-beta3",
-    "ng-alain": "^2.0.0-beta.2",
+    "ng-alain": "^2.0.0-rc.1",
     "prettier": "^1.12.1",
     "prettier-stylelint": "^0.4.2",
     "protractor": "~5.3.0",
@@ -104,6 +106,11 @@
     "webpack-bundle-analyzer": "^2.11.2",
     "xlsx": "^0.12.12"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{cmd,html,json,md,sh,txt,xml,yml}": [
       "editorconfig-tools fix",
@@ -114,10 +121,13 @@
       "prettier --write",
       "git add"
     ],
-    "src/**/*.less": [
+    "*.less": [
       "npm run lint:style",
       "prettier --write",
       "git add"
+    ],
+    "ignore": [
+      "src/assets/*"
     ]
   }
 }

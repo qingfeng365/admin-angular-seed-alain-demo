@@ -12,8 +12,9 @@ form(nz-form="", [formGroup]="form", (ngSubmit)="submit()",role="form")
         input(nz-input="",type="password",formControlName="password",placeholder="请输入密码...(admin)")
       nz-form-explain(*ngIf="password.dirty && password.errors") 请输入密码！
   nz-form-item
-    button.ant-btn__block(nz-button="",type="submit",nzType="primary", nzSize="large",
-      [nzLoading]="http.loading") 登录
+    button(nz-button="",type="submit",nzType="primary", nzSize="large",
+      [nzLoading]="http.loading",
+      nzBlock="") 登录
   nz-form-item
     nz-col([nzSpan]="12")
       a.forgot((click)="msg.error('该功能待实现...')") 忘记密码？

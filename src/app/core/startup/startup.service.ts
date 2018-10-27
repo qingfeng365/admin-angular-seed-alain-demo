@@ -1,5 +1,4 @@
-import { Injectable, Injector, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { zip } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -12,7 +11,16 @@ import {
 import { ACLService } from '@delon/acl';
 import { TranslateService } from '@ngx-translate/core';
 import { I18NService } from '../i18n/i18n.service';
+
+import { NzIconService } from 'ng-zorro-antd';
+import { ICONS_AUTO } from '../../../style-icons-auto';
+import { ICONS } from '../../../style-icons';
+
+
 import { ApiService } from '@core/api/api.service';
+
+
+
 
 /**
  * 用于应用启动时
@@ -21,6 +29,7 @@ import { ApiService } from '@core/api/api.service';
 @Injectable()
 export class StartupService {
   constructor(
+    iconSrv: NzIconService,
     private menuService: MenuService,
     private translate: TranslateService,
     @Inject(ALAIN_I18N_TOKEN) private i18n: I18NService,
@@ -28,9 +37,11 @@ export class StartupService {
     private aclService: ACLService,
     private titleService: TitleService,
     private httpClient: HttpClient,
-    private injector: Injector,
+
     private apiService: ApiService,
-  ) { }
+  ) {
+    iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
+  }
 
   load(): Promise<any> {
     // only works with promises

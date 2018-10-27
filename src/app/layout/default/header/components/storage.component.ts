@@ -4,8 +4,8 @@ import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'header-storage',
   template: `
-  <i class="anticon anticon-tool"></i>
-  {{ 'clear-local-storage' | translate}}
+  <i nz-icon type="tool"></i>
+  {{ 'menu.clear.local.storage' | translate}}
   `,
   host: {
     '[class.d-block]': 'true',
@@ -15,7 +15,7 @@ export class HeaderStorageComponent {
   constructor(
     private confirmServ: NzModalService,
     private messageServ: NzMessageService,
-  ) {}
+  ) { }
 
   @HostListener('click')
   _click() {

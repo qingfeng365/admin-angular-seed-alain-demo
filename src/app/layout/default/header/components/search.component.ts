@@ -9,9 +9,9 @@ import {
 @Component({
   selector: 'header-search',
   template: `
-  <nz-input-group nzAddOnBeforeIcon="anticon anticon-search">
+  <nz-input-group [nzAddOnBeforeIcon]="focus ? 'anticon anticon-arrow-down' : 'anticon anticon-search'">
     <input nz-input [(ngModel)]="q" (focus)="qFocus()" (blur)="qBlur()"
-      [placeholder]="'top-search-ph' | translate">
+      [placeholder]="'menu.search.placeholder' | translate">
   </nz-input-group>
   `,
 })
@@ -34,7 +34,7 @@ export class HeaderSearchComponent implements AfterViewInit {
     setTimeout(() => this.qIpt.focus(), 300);
   }
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngAfterViewInit() {
     this.qIpt = (this.el.nativeElement as HTMLElement).querySelector(

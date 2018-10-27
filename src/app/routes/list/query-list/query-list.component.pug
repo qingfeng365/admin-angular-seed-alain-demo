@@ -68,7 +68,8 @@ nz-card([nzBordered]="false")
       //- 其它按钮 放到 更多操作的 菜单中
       //- 放在工具栏的按钮默认增可批量操作, 如果仅可对一笔记录操作,要通过状态或提示暗示用户
       button(nz-button="",nzType="primary")
-        i.anticon.anticon-plus
+        //- i.anticon.anticon-plus
+        i(nz-icon="", type="plus")
         span 新建
       button.ml-sm(nz-button="", (click)="exportToExcel()")
         | 输出

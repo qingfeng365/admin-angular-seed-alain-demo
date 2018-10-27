@@ -15,14 +15,14 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "首页",
-          "icon": "anticon anticon-home",
+          "icon": "anticon anticon-home-o",
           "link": "/home",
           "hideInBreadcrumb": true
         },
         {
           "text": "快捷菜单",
           "i18n": "shortcut",
-          "icon": "anticon antanticon anticon-rocket",
+          "icon": "anticon anticon-rocket",
           "shortcutRoot": true,
           "children": []
         }
@@ -40,16 +40,16 @@
         },
         {
           "text": "基础表单",
-          "icon": "anticon anticon-edit ",
+          "icon": "anticon anticon-edit",
           "link": "/form/basic-form"
         },
         {
           "text": "基础详情页",
-          "icon": "anticon anticon-file-text",
+          "icon": "anticon anticon-profile",
           "link": "/detail/basic"
         }, {
           "text": "高级详情页",
-          "icon": "anticon anticon-file-text",
+          "icon": "anticon anticon-profile",
           "link": "/detail/advanced"
         }
       ]
@@ -59,7 +59,7 @@
       "hideInBreadcrumb": true,
       "children": [{
         "text": "基本-增删查改",
-        "icon": "anticon anticon-bars",
+        "icon": "anticon anticon-appstore-o",
         "link": "/basic-curd/list"
       }]
     },
