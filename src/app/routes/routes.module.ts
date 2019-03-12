@@ -10,26 +10,24 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 // single pages
 import { UserLockComponent } from './passport/lock/lock.component';
 import { CallbackComponent } from './callback/callback.component';
-import { Exception403Component } from './exception/403.component';
-import { Exception404Component } from './exception/404.component';
-import { Exception500Component } from './exception/500.component';
 import { HomeComponent } from './home/home.component';
 
-
+const COMPONENTS = [
+  HomeComponent,
+  // passport pages
+  UserLoginComponent,
+  UserRegisterComponent,
+  UserRegisterResultComponent,
+  // single pages
+  UserLockComponent,
+  CallbackComponent
+];
+const COMPONENTS_NOROUNT = [];
 @NgModule({
   imports: [SharedModule, RouteRoutingModule],
   declarations: [
-    HomeComponent,
-    // passport pages
-    UserLoginComponent,
-    UserRegisterComponent,
-    UserRegisterResultComponent,
-    // single pages
-    UserLockComponent,
-    CallbackComponent,
-    Exception403Component,
-    Exception404Component,
-    Exception500Component,
+    ...COMPONENTS, ...COMPONENTS_NOROUNT
   ],
+  entryComponents: COMPONENTS_NOROUNT
 })
 export class RoutesModule { }

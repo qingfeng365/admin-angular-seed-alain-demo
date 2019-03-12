@@ -6,12 +6,14 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import {
   SocialService,
   SocialOpenType,
-  TokenService,
+  // TokenService,
+  ITokenService,
   DA_SERVICE_TOKEN,
 } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
-import { StartupService } from '@core/startup/startup.service';
+// import { StartupService } from '@core/startup/startup.service';
+import { StartupService } from '@core';
 import { ApiService } from '@core/api/api.service';
 
 @Component({
@@ -36,7 +38,8 @@ export class UserLoginComponent implements OnDestroy {
     @Optional()
     @Inject(ReuseTabService)
     private reuseTabService: ReuseTabService,
-    @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
+    // @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private startupSrv: StartupService,
     private apiService: ApiService,
     private http: _HttpClient,
@@ -147,6 +150,14 @@ export class UserLoginComponent implements OnDestroy {
           this.tokenService.set(res);
 
           // 还要处理 StartupService.load, 以后用户信息要改为从 tokenService 取
+
+          /** 以下是跳转到登录前要进入的url示例 */
+          // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
+          // this.startupSrv.load().then(() => {
+          //   let url = this.tokenService.referrer.url || '/';
+          //   if (url.includes('/passport')) url = '/';
+          //   this.router.navigateByUrl(url);
+          // });
 
           // 跳转回首页
           this.router.navigate(['/']);

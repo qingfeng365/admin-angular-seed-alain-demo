@@ -11,12 +11,12 @@ import {
 import { throwIfAlreadyLoaded } from '@core/module-import-guard';
 
 import { AlainThemeModule } from '@delon/theme';
-import { DelonABCModule, STConfig } from '@delon/abc';
-import { DelonChartModule } from '@delon/chart';
+// import { DelonABCModule, STConfig } from '@delon/abc';
+// import { DelonChartModule } from '@delon/chart';
 import { DelonAuthModule, DA_STORE_TOKEN, MemoryStore } from '@delon/auth';
-import { DelonACLModule } from '@delon/acl';
-import { DelonCacheModule } from '@delon/cache';
-import { DelonUtilModule } from '@delon/util';
+// import { DelonACLModule } from '@delon/acl';
+// import { DelonCacheModule } from '@delon/cache';
+// import { DelonUtilModule } from '@delon/util';
 
 // #region mock
 import { DelonMockModule } from '@delon/mock';
@@ -54,20 +54,28 @@ const REUSETAB_PROVIDES = [
 
 import { PageHeaderConfig } from '@delon/abc';
 export function fnPageHeaderConfig(): PageHeaderConfig {
-  return Object.assign(new PageHeaderConfig(), { homeI18n: 'home' });
+  return {
+    ...new PageHeaderConfig(),
+    ...{ homeI18n: 'home' } as PageHeaderConfig
+  };
 }
 
 import { DelonAuthConfig } from '@delon/auth';
 export function fnDelonAuthConfig(): DelonAuthConfig {
-  return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
-    login_url: '/passport/login',
-  });
+  return {
+    ...new DelonAuthConfig(),
+    ...{ login_url: '/passport/login' } as DelonAuthConfig
+  };
 }
 
+import { STConfig } from '@delon/abc';
 export function fnSTConfig(): STConfig {
-  return Object.assign(new STConfig(), <STConfig>{
-    modal: { size: 'lg' },
-  });
+  return {
+    ...new STConfig(),
+    ...{
+      modal: { size: 'lg' }
+    } as STConfig
+  };
 }
 
 const GLOBAL_CONFIG_PROVIDES = [
@@ -82,12 +90,12 @@ const GLOBAL_CONFIG_PROVIDES = [
 @NgModule({
   imports: [
     AlainThemeModule.forRoot(),
-    DelonABCModule.forRoot(),
-    DelonChartModule.forRoot(),
-    DelonAuthModule.forRoot(),
-    DelonACLModule.forRoot(),
-    DelonCacheModule.forRoot(),
-    DelonUtilModule.forRoot(),
+    // DelonABCModule.forRoot(),
+    // DelonChartModule.forRoot(),
+    // DelonAuthModule.forRoot(),
+    // DelonACLModule.forRoot(),
+    // DelonCacheModule.forRoot(),
+    // DelonUtilModule.forRoot(),
     // mock
     ...MOCK_MODULES,
   ],
@@ -114,96 +122,3 @@ export class DelonModule {
 }
 
 
-
-// /**
-//  * 进一步对基础模块的导入提炼
-//  * 有关模块注册指导原则请参考：https://github.com/cipchk/ng-alain/issues/180
-//  */
-// import {
-//   NgModule,
-//   Optional,
-//   SkipSelf,
-//   ModuleWithProviders,
-// } from '@angular/core';
-// import { RouteReuseStrategy } from '@angular/router';
-// import { throwIfAlreadyLoaded } from '@core/module-import-guard';
-
-// import { NgZorroAntdModule } from 'ng-zorro-antd';
-// import { AlainThemeModule } from '@delon/theme';
-// import { DelonABCModule, ReuseTabService, ReuseTabStrategy } from '@delon/abc';
-// import { DelonChartModule } from '@delon/chart';
-
-// import { DelonAuthModule, DA_STORE_TOKEN, MemoryStore } from '@delon/auth';
-// import { DelonACLModule } from '@delon/acl';
-// import { DelonCacheModule } from '@delon/cache';
-// import { DelonUtilModule } from '@delon/util';
-// // mock
-// import { DelonMockModule } from '@delon/mock';
-// import * as MOCKDATA from '../../_mock';
-// import { environment } from '@env/environment';
-// const MOCKMODULE = !environment.production ? [DelonMockModule.forRoot({ data: MOCKDATA })] : [];
-
-// // region: global config functions
-
-// import { PageHeaderConfig } from '@delon/abc';
-// export function fnPageHeaderConfig(): PageHeaderConfig {
-//   return Object.assign(new PageHeaderConfig(), { homeI18n: 'home' });
-// }
-
-// import { STConfig } from '@delon/abc';
-// export function fnSTConfig(): STConfig {
-//   return Object.assign(new STConfig(), {});
-// }
-
-// import { DelonAuthConfig } from '@delon/auth';
-// export function fnDelonAuthConfig(): DelonAuthConfig {
-//   return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
-//     login_url: '/passport/login',
-//   });
-// }
-
-// // endregion
-
-// @NgModule({
-//   imports: [
-//     NgZorroAntdModule.forRoot(),
-//     AlainThemeModule.forRoot(),
-//     DelonABCModule.forRoot(),
-//     DelonChartModule.forRoot(),
-//     DelonAuthModule.forRoot(),
-//     DelonACLModule.forRoot(),
-//     DelonCacheModule.forRoot(),
-//     DelonUtilModule.forRoot(),
-//     // mock
-//     ...MOCKMODULE,
-//   ],
-// })
-// export class DelonModule {
-//   constructor(
-//     @Optional()
-//     @SkipSelf()
-//     parentModule: DelonModule,
-//   ) {
-//     throwIfAlreadyLoaded(parentModule, 'DelonModule');
-//   }
-
-//   static forRoot(): ModuleWithProviders {
-//     return {
-//       ngModule: DelonModule,
-//       providers: [
-//         // TIPS：若不需要路由复用需要移除以下代码及模板`<reuse-tab></reuse-tab>`
-//         {
-//           provide: RouteReuseStrategy,
-//           useClass: ReuseTabStrategy,
-//           deps: [ReuseTabService],
-//         },
-//         // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `st` 的页码默认为 `20` 行
-//         { provide: STConfig, useFactory: fnSTConfig },
-//         { provide: PageHeaderConfig, useFactory: fnPageHeaderConfig },
-//         { provide: DelonAuthConfig, useFactory: fnDelonAuthConfig },
-//         // 认证 TOKEN,  用 sessionStorage 存储，关掉浏览器后丢失
-//         { provide: DA_STORE_TOKEN, useClass: MemoryStore }
-//       ],
-//     };
-//   }
-// }

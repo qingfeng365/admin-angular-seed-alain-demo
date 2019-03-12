@@ -52,7 +52,7 @@ const I18NSERVICE_PROVIDES = [
 
 // #region global third module
 // import { UEditorModule } from 'ngx-ueditor';
-import { NgxTinymceModule } from 'ngx-tinymce';
+// import { NgxTinymceModule } from 'ngx-tinymce';
 const GLOBAL_THIRD_MODULES = [
   // UEditorModule.forRoot({
   //   // **注：** 建议使用本地路径；以下为了减少 ng-alain 脚手架的包体大小引用了CDN，可能会有部分功能受影响
@@ -64,9 +64,9 @@ const GLOBAL_THIRD_MODULES = [
   //     UEDITOR_HOME_URL: `//apps.bdimg.com/libs/ueditor/1.4.3.1/`,
   //   },
   // }),
-  NgxTinymceModule.forRoot({
-    baseURL: '//cdn.bootcss.com/tinymce/4.7.4/',
-  }),
+  // NgxTinymceModule.forRoot({
+  //   baseURL: '//cdn.bootcss.com/tinymce/4.7.4/',
+  // }),
 ];
 // #endregion
 
@@ -77,10 +77,10 @@ const FORM_MODULES = [JsonSchemaModule];
 
 // #region Http Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SimpleInterceptor } from '@delon/auth';
+// import { SimpleInterceptor } from '@delon/auth';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 const INTERCEPTOR_PROVIDES = [
-  { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
+  // { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
 ];
 // #endregion
@@ -93,9 +93,9 @@ registerLocaleData(localeZh);
 
 
 import { ApiService } from '@core/api/api.service';
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, `assets/tmp/i18n/`, '.json');
-}
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http, `assets/tmp/i18n/`, '.json');
+// }
 
 // #region Startup Service
 import { StartupService } from '@core/startup/startup.service';
@@ -140,38 +140,7 @@ import { LayoutModule } from './layout/layout.module';
     ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES,
 
-    // TranslateModule.forRoot({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: HttpLoaderFactory,
-    //     deps: [HttpClient],
-    //   },
-    // }),
-    // // thirds
-    // // 这里旧版本的配置
-    // // UEditorModule.forRoot({
-    // //   // 指定ueditor.js路径目录
-    // //   path: 'assets/ueditor/',
-    // //   // 默认全局配置项
-    // //   options: {
-    // //     themePath: '/assets/ueditor/themes/'
-    // //   }
-    // // }),
-    // // 这是新版本的配置,还需要修改
-    // // UEditorModule.forRoot({
-    // //   // **注：** 建议使用本地路径；以下为了减少 ng-alain 脚手架的包体大小引用了CDN，可能会有部分功能受影响
-    // //   js: [
-    // //     `//apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.config.js`,
-    // //     `//apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.all.min.js`,
-    // //   ],
-    // //   options: {
-    // //     UEDITOR_HOME_URL: `//apps.bdimg.com/libs/ueditor/1.4.3.1/`,
-    // //   },
-    // // }),
 
-    // NgxTinymceModule.forRoot({
-    //   baseURL: '//cdn.bootcss.com/tinymce/4.7.4/',
-    // }),
 
   ],
   providers: [
@@ -181,18 +150,6 @@ import { LayoutModule } from './layout/layout.module';
     ...APPINIT_PROVIDES,
     ApiService,
 
-    // { provide: LOCALE_ID, useValue: 'zh-Hans' },
-    // { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
-    // { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
-    // ApiService,
-    // StartupService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: StartupServiceFactory,
-    //   deps: [StartupService],
-    //   multi: true,
-    // },
   ],
   bootstrap: [AppComponent]
 })

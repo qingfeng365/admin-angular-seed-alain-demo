@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+// import { Routes, RouterModule } from '@angular/router';
 
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '@shared';
 import { ProRoutingModule } from './pro-routing.module';
 
 
@@ -14,21 +14,23 @@ import { ProAccountSettingsBaseComponent } from './account/settings/base/base.co
 import { ProAccountSettingsSecurityComponent } from './account/settings/security/security.component';
 import { ProAccountSettingsBindingComponent } from './account/settings/binding/binding.component';
 import { ProAccountSettingsNotificationComponent } from './account/settings/notification/notification.component';
-
+const COMPONENTS = [
+  ProAccountCenterComponent,
+  ProAccountCenterArticlesComponent,
+  ProAccountCenterProjectsComponent,
+  ProAccountCenterApplicationsComponent,
+  ProAccountSettingsComponent,
+  ProAccountSettingsBaseComponent,
+  ProAccountSettingsSecurityComponent,
+  ProAccountSettingsBindingComponent,
+  ProAccountSettingsNotificationComponent,
+]
 const COMPONENTS_NOROUNT = [];
 
 @NgModule({
   imports: [SharedModule, ProRoutingModule],
   declarations: [
-    ProAccountCenterComponent,
-    ProAccountCenterArticlesComponent,
-    ProAccountCenterProjectsComponent,
-    ProAccountCenterApplicationsComponent,
-    ProAccountSettingsComponent,
-    ProAccountSettingsBaseComponent,
-    ProAccountSettingsSecurityComponent,
-    ProAccountSettingsBindingComponent,
-    ProAccountSettingsNotificationComponent,
+    ...COMPONENTS,
     ...COMPONENTS_NOROUNT,
   ],
   entryComponents: COMPONENTS_NOROUNT,

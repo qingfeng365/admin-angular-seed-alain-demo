@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ReuseTabService } from '@delon/abc';
@@ -6,13 +6,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'basic-form',
   templateUrl: './basic-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./basic-form.component.less']
 })
 export class BasicFormComponent implements OnInit {
   form: FormGroup;
   submitting = false;
   currUrl: string;
-  constructor(private fb: FormBuilder, private msg: NzMessageService,
+  constructor(private fb: FormBuilder, private msg: NzMessageService, private cdr: ChangeDetectorRef,
+
     private reuseTabService: ReuseTabService,
     router: Router) {
     this.currUrl = router.url;
@@ -44,6 +46,7 @@ export class BasicFormComponent implements OnInit {
     setTimeout(() => {
       this.submitting = false;
       this.msg.success(`提交成功`);
+      this.cdr.detectChanges();
       setTimeout(() => {
         this.close();
       }, 1000);

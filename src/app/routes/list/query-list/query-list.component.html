@@ -65,7 +65,7 @@
   <nz-divider></nz-divider>
   <nz-row class="mb-md" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <nz-col>
-      <button nz-button="" nzType="primary"><i class="anticon anticon-plus"></i><span>新建</span></button>
+      <button nz-button="" nzType="primary"><i nz-icon="" type="plus"></i><span>新建</span></button>
       <button class="ml-sm" nz-button="" (click)="exportToExcel()">输出</button>
       <button class="ml-sm" nz-button="" [disabled]="selectedRows.length === 0">批量操作</button>
       <nz-dropdown class="ml-sm" nzPlacement="bottomLeft">
@@ -83,7 +83,7 @@
       </nz-alert>
     </nz-col>
   </nz-row>
-  <st #st="" [columns]="columns" [data]="dataUrl" [loading]="loading" (checkboxChange)="checkboxChange($event)" (change)="change($event)" [res]="stres" [req]="{params:q}" [page]="{showSize: true, showQuickJumper: true}">
+  <st #st="" [columns]="columns" [data]="dataUrl" [loading]="loading" (change)="stChange($event)" [res]="stres" [req]="{params:q}" [page]="{showSize: true, showQuickJumper: true}">
     <ng-template st-row="status" let-i="">
       <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
     </ng-template>

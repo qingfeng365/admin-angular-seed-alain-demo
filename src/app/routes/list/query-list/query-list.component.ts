@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { STComponent, STColumn, STData } from '@delon/abc';
+import { STComponent, STColumn, STData, STChange } from '@delon/abc';
 import { SortDef } from '../../../common-type';
 import * as _ from 'lodash';
 
@@ -10,6 +10,7 @@ let self: QueryListComponent;
 @Component({
   selector: 'app-query-list',
   templateUrl: './query-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./query-list.component.less'],
 })
 export class QueryListComponent implements OnInit {
@@ -143,6 +144,7 @@ export class QueryListComponent implements OnInit {
     private http: _HttpClient,
     public msg: NzMessageService,
     private modalSrv: NzModalService,
+    private cdr: ChangeDetectorRef
   ) { }
   ngOnInit() {
     self = this;
@@ -206,6 +208,15 @@ export class QueryListComponent implements OnInit {
   clearSelected() {
     this.selectedRows = [];
     this.st.clearCheck();
+  }
+
+  stChange(e: STChange) {
+    switch (e.type) {
+      case 'checkbox':
+        this.selectedRows = e.checkbox;
+        this.cdr.detectChanges();
+        break;
+    }
   }
   checkboxChange(list: STData[]) {
     // checkboxChange 的 参数 list, 仅为当前页面的 选择列表

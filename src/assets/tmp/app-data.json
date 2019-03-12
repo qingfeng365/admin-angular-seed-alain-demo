@@ -53,15 +53,6 @@
           "link": "/detail/advanced"
         }
       ]
-    }, {
-      "text": "综合",
-      "group": true,
-      "hideInBreadcrumb": true,
-      "children": [{
-        "text": "基本-增删查改",
-        "icon": "anticon anticon-appstore-o",
-        "link": "/basic-curd/list"
-      }]
     },
     {
       "text": "安全",
@@ -129,8 +120,9 @@
       "group": true,
       "icon": "anticon anticon-info",
       "children": [{
-          "text": "图标",
-          "link": "/style/iconsfont"
+          "text": "Grid Masonry",
+          "link": "/style/gridmasonry",
+          "i18n": "menu.style.gridmasonry"
         },
         {
           "text": "色系",

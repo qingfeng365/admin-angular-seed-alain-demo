@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingsService } from '@delon/theme';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 
 @Component({
   selector: 'passport-lock',
@@ -13,6 +14,7 @@ export class UserLockComponent {
 
   constructor(
     fb: FormBuilder,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     public settings: SettingsService,
     private router: Router,
   ) {
@@ -30,7 +32,10 @@ export class UserLockComponent {
     if (this.f.valid) {
       console.log('Valid!');
       console.log(this.f.value);
-      this.router.navigate(['dashboard']);
+      this.tokenService.set({
+        token: '123'
+      });
+      this.router.navigate(['/']);
     }
   }
 }
