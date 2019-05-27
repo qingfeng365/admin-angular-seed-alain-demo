@@ -1,6 +1,13 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpEvent, HttpResponseBase } from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpResponseBase,
+} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService, NzNotificationService } from 'ng-zorro-antd';
@@ -33,26 +40,24 @@ const CODEMESSAGE = {
 export class DefaultInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) { }
 
-  get msg(): NzMessageService {
-    return this.injector.get(NzMessageService);
+  private get notification(): NzNotificationService {
+    return this.injector.get(NzNotificationService);
   }
 
   private goTo(url: string) {
     setTimeout(() => this.injector.get(Router).navigateByUrl(url));
   }
+
   private checkStatus(ev: HttpResponseBase) {
-    if (ev.status >= 200 && ev.status < 300) return;
+    if ((ev.status >= 200 && ev.status < 300) || ev.status === 401) {
+      return;
+    }
 
     const errortext = CODEMESSAGE[ev.status] || ev.statusText;
-    this.injector.get(NzNotificationService).error(
-      `请求错误 ${ev.status}: ${ev.url}`,
-      errortext
-    );
+    this.notification.error(`请求错误 ${ev.status}: ${ev.url}`, errortext);
   }
-  private handleData(
-    // event: HttpResponse<any> | HttpErrorResponse,
-    ev: HttpResponseBase
-  ): Observable<any> {
+
+  private handleData(ev: HttpResponseBase): Observable<any> {
     // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
     if (ev.status > 0) {
       this.injector.get(_HttpClient).end();
@@ -81,66 +86,43 @@ export class DefaultInterceptor implements HttpInterceptor {
         //     }
         // }
         break;
-      case 401: // 未登录状态码
-        // 请求错误 401: https://preview.pro.ant.design/api/401 用户没有权限（令牌、用户名、密码错误）。
+      case 401:
+        this.notification.error(`未登录或登录已过期，请重新登录。`, ``);
+        // 清空 token 信息
         (this.injector.get(DA_SERVICE_TOKEN) as ITokenService).clear();
         this.goTo('/passport/login');
         break;
       case 403:
-        this.goTo(`/exception/${ev.status}`);
-        break;
       case 404:
-        this.goTo(`/exception/${ev.status}`);
-        break;
-      case 422:
-        break;
       case 500:
         this.goTo(`/exception/${ev.status}`);
         break;
       default:
         if (ev instanceof HttpErrorResponse) {
-          console.warn(
-            '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
-            event,
-          );
-          this.msg.error(ev.message);
+          console.warn('未可知错误，大部分是由于后端不支持CORS或无效配置引起', ev);
+          return throwError(ev);
         }
         break;
     }
-    if (ev instanceof HttpErrorResponse) {
-      return throwError(ev.error || ev);
-    } else {
-
-      return of(ev);
-    }
+    return of(ev);
   }
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>>
-   {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 统一加上服务端前缀
     let url = req.url;
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = environment.SERVER_URL + url;
     }
 
-    const newReq = req.clone({
-      url,
-    });
+    const newReq = req.clone({ url });
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {
-
-        // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
-        if (event instanceof HttpResponseBase && event.status === 200)
-          return this.handleData(event);
+        // 允许统一对请求错误处理
+        if (event instanceof HttpResponseBase) return this.handleData(event);
         // 若一切都正常，则后续操作
         return of(event);
       }),
-      catchError((err: HttpErrorResponse) => {
-        return this.handleData(err);
-      }),
+      catchError((err: HttpErrorResponse) => this.handleData(err)),
     );
   }
 }

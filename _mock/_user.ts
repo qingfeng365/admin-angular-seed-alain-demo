@@ -1,6 +1,6 @@
 import { MockRequest } from '@delon/mock';
 
-const list = [];
+const list: any[] = [];
 const total = 50;
 
 for (let i = 0; i < total; i += 1) {
@@ -50,8 +50,7 @@ export const USERS = {
   'POST /user/:id': (req: MockRequest) => saveData(+req.params.id, req.body),
   '/user/current': {
     name: 'Cipchk',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'cipchk@qq.com',
     signature: '海纳百川，有容乃大',
@@ -99,4 +98,23 @@ export const USERS = {
     phone: '你猜-你猜你猜猜猜',
   },
   'POST /user/avatar': 'ok',
+  'POST /login/account': (req: MockRequest) => {
+    const data = req.body;
+    if (!(data.userName === 'admin' || data.userName === 'user') || data.password !== 'ng-alain.com') {
+      return { msg: `Invalid username or password（admin/ng-alain.com）` };
+    }
+    return {
+      msg: 'ok',
+      user: {
+        token: '123456789',
+        name: data.userName,
+        email: `${data.userName}@qq.com`,
+        id: 10000,
+        time: +new Date(),
+      },
+    };
+  },
+  'POST /register': {
+    msg: 'ok',
+  },
 };

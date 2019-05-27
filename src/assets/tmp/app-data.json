@@ -15,14 +15,14 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "首页",
-          "icon": "anticon anticon-home-o",
+          "icon": "anticon-home-o",
           "link": "/home",
           "hideInBreadcrumb": true
         },
         {
           "text": "快捷菜单",
           "i18n": "shortcut",
-          "icon": "anticon anticon-rocket",
+          "icon": "anticon-rocket",
           "shortcutRoot": true,
           "children": []
         }
@@ -35,21 +35,21 @@
       "hideInBreadcrumb": true,
       "children": [{
           "text": "查询列表",
-          "icon": "anticon anticon-bars",
+          "icon": "anticon-bars",
           "link": "/list/query-list"
         },
         {
           "text": "基础表单",
-          "icon": "anticon anticon-edit",
+          "icon": "anticon-edit",
           "link": "/form/basic-form"
         },
         {
           "text": "基础详情页",
-          "icon": "anticon anticon-profile",
+          "icon": "anticon-profile",
           "link": "/detail/basic"
         }, {
           "text": "高级详情页",
-          "icon": "anticon anticon-profile",
+          "icon": "anticon-profile",
           "link": "/detail/advanced"
         }
       ]
@@ -87,7 +87,7 @@
         {
           "text": "Account",
           "i18n": "pro-account",
-          "icon": "anticon anticon-user",
+          "icon": "anticon-user",
           "children": [{
               "text": "center",
               "link": "/pro/account/center",
@@ -118,7 +118,7 @@
     }, {
       "text": "样式",
       "group": true,
-      "icon": "anticon anticon-info",
+      "icon": "anticon-info",
       "children": [{
           "text": "Grid Masonry",
           "link": "/style/gridmasonry",

@@ -213,7 +213,7 @@ export class QueryListComponent implements OnInit {
   stChange(e: STChange) {
     switch (e.type) {
       case 'checkbox':
-        this.selectedRows = e.checkbox;
+        this.selectedRows = e.checkbox!;
         this.cdr.detectChanges();
         break;
     }
