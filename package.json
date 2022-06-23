@@ -79,7 +79,7 @@
     "@types/mockjs": "^1.0.0",
     "@types/node": "~6.0.60",
     "@types/z-schema": "^3.16.32",
-    "codecov": "^3.0.0",
+    "codecov": "^3.8.3",
     "codelyzer": "~4.0.1",
     "editorconfig-tools": "^0.1.1",
     "husky": "^0.14.3",
